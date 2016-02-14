@@ -20,6 +20,7 @@ void thk::THKame::loop()
 	double timeStamp = glfwGetTime();
 	do // Drawing loop
 	{
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

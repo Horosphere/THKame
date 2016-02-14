@@ -13,7 +13,7 @@
 namespace thk
 {
 
-
+GLuint glLoadShader(char const* vertexPath, char const* fragmentPath);
 GLuint glLoadBMP(char const* const path);
 GLuint glLoadPNG(char const* const path);
 

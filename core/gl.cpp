@@ -12,12 +12,12 @@
 #include <boost/gil/extension/io/png_io.hpp>
 
 
-GLuint thk::glInitShaders(char const* vertexPath, char const* fragmentPath)
+GLuint thk::glLoadShader(char const* vertexPath, char const* fragmentPath)
 {
+	std::cout << "Loading shaders: " << vertexPath << ", " << fragmentPath << std::endl;
+
 	// Create the shaders
 	GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
-	GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-
 	// Read the Vertex Shader code from the file
 	std::string vertexShader;
 	std::ifstream vertexShaderStream(vertexPath, std::ios::in);
@@ -34,6 +34,7 @@ GLuint thk::glInitShaders(char const* vertexPath, char const* fragmentPath)
 		return 0;
 	}
 
+	GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
 	// Read the Fragment Shader code from the file
 	std::string fragmentShader;
 	std::ifstream fragmentShaderStream(fragmentPath, std::ios::in);
@@ -54,9 +55,8 @@ GLuint thk::glInitShaders(char const* vertexPath, char const* fragmentPath)
 	int infoLogLength;
 
 	// Compile Vertex Shader
-	std::cout << "Compiling shader: " << vertexPath << std::endl;
-	char const * VertexSourcePointer = vertexShader.c_str();
-	glShaderSource(vertexShaderId, 1, &VertexSourcePointer, NULL);
+	char const* temp = vertexShader.c_str();
+	glShaderSource(vertexShaderId, 1, &temp, NULL);
 	glCompileShader(vertexShaderId);
 
 	// Check Vertex Shader
@@ -69,12 +69,9 @@ GLuint thk::glInitShaders(char const* vertexPath, char const* fragmentPath)
 		std::cerr << vertexShaderErrorMessage[0] << std::endl;
 	}
 
-
-
 	// Compile Fragment Shader
-	std::cout << "Compiling shader:" << fragmentPath << std::endl;
-	char const * FragmentSourcePointer = fragmentShader.c_str();
-	glShaderSource(fragmentShaderId, 1, &FragmentSourcePointer, NULL);
+	temp = fragmentShader.c_str();
+	glShaderSource(fragmentShaderId, 1, &temp, NULL);
 	glCompileShader(fragmentShaderId);
 
 	// Check Fragment Shader
@@ -102,13 +99,6 @@ GLuint thk::glInitShaders(char const* vertexPath, char const* fragmentPath)
 		glGetProgramInfoLog(programId, infoLogLength, NULL, &programErrorMessage[0]);
 		std::cerr << &programErrorMessage[0] << std::endl;
 	}
-
-
-	glDetachShader(programId, vertexShaderId);
-	glDetachShader(programId, fragmentShaderId);
-
-	glDeleteShader(vertexShaderId);
-	glDeleteShader(fragmentShaderId);
 
 	return programId;
 }
