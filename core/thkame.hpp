@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/vec3.hpp>
 
+#include "config.hpp"
 #include "gl.hpp"
 
 namespace thk
@@ -16,6 +17,9 @@ private:
 	~THKame();
 
 	GLFWwindow* window;
+
+	GLuint quadVBO, quadEBO;
+	GLuint quadShader;
 public:
 	void init(GLFWwindow* window);
 	void terminate();

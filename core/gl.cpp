@@ -100,6 +100,11 @@ GLuint thk::glLoadShader(char const* vertexPath, char const* fragmentPath)
 		std::cerr << &programErrorMessage[0] << std::endl;
 	}
 
+	glDetachShader(programId, fragmentShaderId);
+	glDetachShader(programId, vertexShaderId);
+	glDeleteShader(fragmentShaderId);
+	glDeleteShader(vertexShaderId);
+
 	return programId;
 }
 
@@ -154,7 +159,8 @@ GLuint thk::glLoadBMP(char const* const path)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
 
 	delete[] data; // Data is transfered.
-
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -165,17 +171,17 @@ GLuint thk::glLoadBMP(char const* const path)
 GLuint thk::glLoadPNG(char const* const path)
 {
 	using namespace boost::gil;
-	rgba8_view_t view;
-	png_read_and_convert_view(path, view);
-
+	rgba8_image_t image;
+	png_read_and_convert_image(path, image);
+	auto& view = image._view;
 	unsigned char* data = new unsigned char[view.width() * view.height() *
-			num_channels<rgba8_pixel_t>()];
+		num_channels<rgba8_pixel_t>()];
 
 	std::size_t i = 0;
- 	for (int x = 0; x < view.width(); ++x)
+ 	for (int x = 0; x < view.height(); ++x)
 	{
-		auto it = view.col_begin(x);
-		for (int y = 0; y < view.height(); ++y)
+		auto it = view.row_begin(x);
+		for (int y = 0; y < view.width(); ++y)
 		{
 			data[i] = at_c<0>(it[y]); ++i;
 			data[i] = at_c<1>(it[y]); ++i;

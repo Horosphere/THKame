@@ -14,8 +14,8 @@ float bulletRadiusSq[10] = { 1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f };
 struct Bullet
 {
 	unsigned char type;
-	int x, y; // Coordinates
-	int vx, vy; // Velocity
+	float x, y; // Coordinates
+	float vx, vy; // Velocity
 };
 
 class BBField
