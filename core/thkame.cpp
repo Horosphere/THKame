@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "../server/thkameserver.hpp"
+
 // Ctor and Dtor
 thk::THKame::~THKame() {}
 
@@ -29,21 +31,43 @@ void thk::THKame::init(GLFWwindow* window)
 	glBindFragDataLocation(quadShader, 0, "outColor");
 	glUseProgram(quadShader);
 
+	loopMenu();
 }
 void thk::THKame::terminate()
 {
 }
-void thk::THKame::loop()
+
+void thk::THKame::loopMenu()
 {
-	glm::vec2 position(124.f, 124.f);
-	double timeStamp = glfwGetTime();
 	do // Drawing loop
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		if (state == IN_GAME) break;
 	}
-	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS
-		   && !glfwWindowShouldClose(window));
+	while (!glfwWindowShouldClose(window));
+
+	loopInGame();
+}
+void thk::THKame::loopInGame()
+{
+	THKameServer server(window);
+
+	do // Drawing loop
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		server.update();
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+
+		if (state == MAIN_MENU) break;
+	}
+	while (!glfwWindowShouldClose(window));
+
+	loopMenu();
 }

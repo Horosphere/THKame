@@ -29,7 +29,7 @@ GLuint const quadElements[] = {
 // Convert THKame position to OpenGL position [-W/2, W/2] x [-H/2, H/2] -> [-1,1] x [-1,1]
 glm::vec3 kamePosition(float x, float y);
 // Convert raster image to OpenGL image
-glm::mat4 matrixKame(float width, float height);
+glm::mat4 inverseRaster(float width, float height);
 GLuint glLoadShader(char const* vertexPath, char const* fragmentPath);
 GLuint glLoadBMP(char const* const path);
 GLuint glLoadPNG(char const* const path);
@@ -41,7 +41,7 @@ inline glm::vec3 thk::kamePosition(float x, float y)
 {
 	return glm::vec3(x / windowW2, y / windowH2, 0.f);
 }
-inline glm::mat4 thk::matrixKame(float width, float height)
+inline glm::mat4 thk::inverseRaster(float width, float height)
 {
 	return glm::scale(glm::vec3(1 / width, 1 / height, 1.f));
 }

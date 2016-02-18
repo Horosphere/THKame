@@ -6,12 +6,12 @@ thk::BBField::~BBField()
 
 bool thk::BBField::collides(float px, float py)
 {
-	for (auto&& b : bullets0)
+	for (auto&& b : bullets0) // Circle-Circle collision
 	{
 		if (((px - b.x) * (px - b.x) + (px - b.x) * (px - b.x))
 			<= playerRadiusSq + 2 * playerRadius * bulletRadius[b.type]+ bulletRadiusSq[b.type]) return true;
 	}
-	for (auto&& b : bullets1)
+	for (auto&& b : bullets1) // Circle-Line collision
 	{
 		float normV = sqrtf(b.vx * b.vx + b.vy * b.vy);
 		float dx = b.vx / normV; // Directions
@@ -25,18 +25,18 @@ bool thk::BBField::collides(float px, float py)
 		// Dot product
 		float dot = dx * ux + dy * uy;
 		float nx = 0.f, ny = 0.f; // Nearest point
-		if (dot <= 0)
-		{
+		if (dot <= 0) 
+		{ // Centre of circle behind first point
 			nx = seg0x;
 			ny = seg0y;
 		}
-		else if (dot >= 2 * bulletRadius[b.type])
-		{
+		else if (dot >= 2 * bulletRadius[b.type]) 
+		{ // Centre of circle exceeds second point
 			nx = b.x - bulletRadius[b.type] * dx;
 			ny = b.y - bulletRadius[b.type] * dy;
 		}
 		else
-		{
+		{ // Nearest point falls on line segment
 			nx = seg0x - dx * dot;
 			ny = seg0y - dy * dot;
 		}

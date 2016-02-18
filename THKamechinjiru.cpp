@@ -56,10 +56,7 @@ int main(int argc,char* argv[])
 	// Registering callbacks
 	glfwSetKeyCallback(window, &thk::THKame::callbackKeys);
 
-
 	thk::THKame::instance().init(window);
-	thk::THKame::instance().loop();
-	thk::THKame::instance().terminate();
 
 	glfwTerminate();
 
@@ -97,7 +94,7 @@ void test(GLFWwindow* window)
 
 	GLuint shader = thk::glLoadShader("glsl/simple_vertex_shader.glsl",
 									  "glsl/simple_fragment_shader.glsl");
-	GLuint texture = thk::glLoadPNG("textures/title_logo.png");
+	GLuint texture = thk::glLoadPNG("textures/ui/title_logo.png");
 	glBindFragDataLocation(shader, 0, "outColor");
 	glUseProgram(shader);
 

@@ -2,6 +2,7 @@
 
 #include <vector>
 
+// TODO: merge into THKameServer
 namespace thk
 {
 
@@ -10,7 +11,6 @@ float const playerRadius = 2.82f;
 float bulletRadius[10] = { 1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f };
 float bulletRadiusSq[10] = { 1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f };
 
-// Everything is in raster space (640 x 480)
 struct Bullet
 {
 	unsigned char type;
