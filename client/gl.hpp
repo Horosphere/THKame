@@ -9,8 +9,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
+#include <ft2build.h>
+#include <freetype/ftglyph.h>
 
-#include "config.hpp"
+#include "../core/config.hpp"
 
 namespace thk
 {
@@ -34,6 +36,48 @@ GLuint glLoadShader(char const* vertexPath, char const* fragmentPath);
 GLuint glLoadBMP(char const* const path);
 GLuint glLoadPNG(char const* const path);
 
+class Font
+{
+public:
+	struct Character
+	{
+		Character()
+		{
+			x0 = 0;
+			y0 = 0;
+			x1 = 0;
+			y1 = 0;
+			offsetX = 0;
+			offsetY = 0;
+		}
+		/**
+		*   存储当前字符在纹理上的坐标位置
+		*/
+
+		unsigned int   x0 : 10;
+		unsigned int   y0 : 10;
+		unsigned int   x1 : 10;
+		unsigned int   y1 : 10;
+		unsigned int   offsetX : 10;
+		unsigned int   offsetY : 10;
+	};
+
+	Font(const char* fontFile, int fontSize);
+	Character* getCharacter(wchar_t ch);
+	void  drawText(float x, float y, const wchar_t* text);
+
+
+protected:
+	// 65536 = 1 << 16
+	Character   characters[65536];
+	FT_Library  library;
+	FT_Face     face;
+	unsigned    textureId;
+	int         yStart;
+	int         xStart;
+	int         fontSize;
+};
+
 } // namespace thk
 
 // Implementations
@@ -45,3 +89,4 @@ inline glm::mat4 thk::inverseRaster(float width, float height)
 {
 	return glm::scale(glm::vec3(1 / width, 1 / height, 1.f));
 }
+

@@ -10,8 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "core/thkame.hpp"
-#include "core/gl.hpp"
+#include "client/thkame.hpp"
 
 void test(GLFWwindow* window);
 

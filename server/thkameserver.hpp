@@ -33,7 +33,7 @@ public:
 
 // Implementations
 
-thk::THKameServer::THKameServer(GLFWwindow* window): window(window)
+inline thk::THKameServer::THKameServer(GLFWwindow* window): window(window)
 {
 	timeStamp = std::chrono::high_resolution_clock::now();
 }

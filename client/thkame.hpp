@@ -5,7 +5,7 @@
 #include <glm/vec3.hpp>
 
 #include "config.hpp"
-#include "gl.hpp"
+#include "../client/gl.hpp"
 
 namespace thk
 {
