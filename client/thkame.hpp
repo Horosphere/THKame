@@ -1,11 +1,12 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/vec3.hpp>
-
-#include "config.hpp"
-#include "../client/gl.hpp"
+#include <Urho3D/Engine/Application.h>
+#include <Urho3D/Core/CoreEvents.h>
+#include <Urho3D/Core/ProcessUtils.h>
+#include <Urho3D/Input/Input.h>
+#include <Urho3D/UI/Font.h>
+#include <Urho3D/UI/Text.h>
+#include <Urho3D/UI/UI.h>
 
 namespace thk
 {
@@ -17,31 +18,33 @@ enum State
 	TRANSITIONING
 };
 
-class THKame final
+class THKame final: public Urho3D::Application
 {
+	URHO3D_OBJECT(THKame, Urho3D::Application);
+
 private:
-	THKame();
-	~THKame();
-
-	// One time initialised constants
-	GLFWwindow* window;
-
-	GLuint quadVBO, quadEBO;
-	GLuint quadShader;
 
 	// Game variables
 	bool isPaused;
+	// State of Game(main menu, ingame, etc.)
 	State state;
 
-	void loopMenu(); // Main menu
-	void loopInGame(); // In game
 public:
-	void init(GLFWwindow* window);
+	THKame(Urho3D::Context* context);
+	~THKame();
+	void init();
 	void terminate();
 
+	/// Handle key down event to process key controls common to all samples.
+	void onKeyDown(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+	/// Handle scene update event to control camera's pitch and yaw for all samples.
+	void onSceneUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+	/// Handle touch begin event to initialize touch input on desktop platform.
+	void onTouchBegin(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+	void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 
 	// Callback functions
-	static void callbackKeys(GLFWwindow*, int key, int scancode, int action, int mods);
+	static void callbackKeys(int key, int scancode, int action, int mods);
 
 	static THKame& instance();
 };
@@ -49,8 +52,9 @@ public:
 } // namespace thk
 
 // Implementations
-inline thk::THKame::THKame(): state(MAIN_MENU) {}
-inline void thk::THKame::callbackKeys(GLFWwindow* window, int key, int scancode, int action, int mods)
+inline thk::THKame::THKame(Urho3D::Context* context): Application(context), state(MAIN_MENU) {}
+
+inline void thk::THKame::callbackKeys(int key, int scancode, int action, int mods)
 {
 
 }

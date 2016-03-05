@@ -2,8 +2,6 @@
 
 #include <chrono>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
 namespace thk
 {
@@ -18,13 +16,12 @@ struct Bullet
 class THKameServer final
 {
 private:
-	GLFWwindow* window;
 
 	float playerX;
 	float playerY;
 	std::chrono::time_point<std::chrono::steady_clock> timeStamp;
 public:
-	THKameServer(GLFWwindow* window);
+	THKameServer();
 	
 	void update();
 };
@@ -33,7 +30,7 @@ public:
 
 // Implementations
 
-inline thk::THKameServer::THKameServer(GLFWwindow* window): window(window)
+inline thk::THKameServer::THKameServer(): window(window)
 {
 	timeStamp = std::chrono::high_resolution_clock::now();
 }

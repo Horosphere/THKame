@@ -7,67 +7,31 @@
 // Ctor and Dtor
 thk::THKame::~THKame() {}
 
-void thk::THKame::init(GLFWwindow* window)
+void thk::THKame::init()
 {
 	std::cout << "Initialising THKame" << std::endl;
 
-	this->window = window;
-
-	// Register OpenGL related parts
-
-	// One vao is enough for 2D games
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	glGenBuffers(1, &quadVBO); // Generate 1 buffer
-	glGenBuffers(1, &quadEBO);
-	glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quadEBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadElements), quadElements, GL_STATIC_DRAW);
-	quadShader = thk::glLoadShader("glsl/simple_vertex_shader.glsl",
-								   "glsl/simple_fragment_shader.glsl");
-	glBindFragDataLocation(quadShader, 0, "outColor");
-	glUseProgram(quadShader);
-
-	loopMenu();
 }
 void thk::THKame::terminate()
 {
 }
 
-void thk::THKame::loopMenu()
+/// Handle key down event to process key controls common to all samples.
+void thk::THKame::onKeyDown(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
 {
-	do // Drawing loop
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-
-		if (state == IN_GAME) break;
-	}
-	while (!glfwWindowShouldClose(window));
-
-	loopInGame();
 }
-void thk::THKame::loopInGame()
+/// Handle scene update event to control camera's pitch and yaw for all samples.
+void thk::THKame::onSceneUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
 {
-	THKameServer server(window);
 
-	do // Drawing loop
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
+}
+/// Handle touch begin event to initialize touch input on desktop platform.
+void thk::THKame::onTouchBegin(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
+{
 
-		server.update();
+}
+void thk::THKame::update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
+{
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-
-		if (state == MAIN_MENU) break;
-	}
-	while (!glfwWindowShouldClose(window));
-
-	loopMenu();
 }

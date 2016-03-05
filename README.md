@@ -11,10 +11,6 @@ Libs:
 
 Boost 1.60.0
 
-OpenGL:
-  glew 1.13.0,
-  glfw 3.1.2,
-  glm 0.9.7.2
+Urho3D 1.5
   
 libpng 1.6.21
-freetype 2.6.3
