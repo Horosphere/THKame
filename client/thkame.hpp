@@ -1,12 +1,24 @@
 #pragma once
 
 #include <Urho3D/Engine/Application.h>
-#include <Urho3D/Core/CoreEvents.h>
-#include <Urho3D/Core/ProcessUtils.h>
+#include <Urho3D/Graphics/Camera.h>
+#include <Urho3D/Engine/Console.h>
+#include <Urho3D/UI/Cursor.h>
+#include <Urho3D/Engine/DebugHud.h>
+#include <Urho3D/Engine/Engine.h>
+#include <Urho3D/IO/FileSystem.h>
+#include <Urho3D/Graphics/Graphics.h>
 #include <Urho3D/Input/Input.h>
-#include <Urho3D/UI/Font.h>
-#include <Urho3D/UI/Text.h>
+#include <Urho3D/Input/InputEvents.h>
+#include <Urho3D/Graphics/Renderer.h>
+#include <Urho3D/Resource/ResourceCache.h>
+#include <Urho3D/Scene/Scene.h>
+#include <Urho3D/Scene/SceneEvents.h>
+#include <Urho3D/UI/Sprite.h>
+#include <Urho3D/Graphics/Texture2D.h>
+#include <Urho3D/Core/Timer.h>
 #include <Urho3D/UI/UI.h>
+#include <Urho3D/Resource/XMLFile.h>
 
 namespace thk
 {
@@ -43,24 +55,9 @@ public:
 	void onTouchBegin(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 	void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 
-	// Callback functions
-	static void callbackKeys(int key, int scancode, int action, int mods);
-
-	static THKame& instance();
 };
 
 } // namespace thk
 
 // Implementations
 inline thk::THKame::THKame(Urho3D::Context* context): Application(context), state(MAIN_MENU) {}
-
-inline void thk::THKame::callbackKeys(int key, int scancode, int action, int mods)
-{
-
-}
-
-inline thk::THKame& thk::THKame::instance()
-{
-	static THKame thkame;
-	return thkame;
-}
