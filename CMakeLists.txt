@@ -14,9 +14,14 @@ project(THKame)
 set(LIBDIR_URHO3D "~/Urho3D"
     CACHE STRING "Path to Urho3D source" )
 
+set(PROJECT_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR})
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+# All source files go here:
+set(SOURCE_FILES
+	${PROJECT_SOURCE_DIR}/thk.cpp)
 
 # All headers are placed beside the sources
 include_directories("${PROJECT_SOURCE_DIR}")
@@ -31,11 +36,9 @@ find_package(Urho3D REQUIRED)
 # Enable C++ 11
 add_compile_options(-std=c++11)
 
-SET(SOURCE_FILES
-	thk.cpp)
 
 set(TARGET_NAME THKame)
 
 # These are Urho3D specific functions 
-define_source_files()
+# define_source_files()
 setup_main_executable()
