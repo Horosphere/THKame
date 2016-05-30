@@ -1,13 +1,14 @@
-# Touhou Kamichinjiru
+# Touhou Kamechinjiru 東方亀珍汁
 
 A STG game with Japanese and American elements
 
 ## Building
 
 ###### Dependencies
+THKame uses [CMake](https://cmake.org/) to automate the process of linking libraries. It is avaliable on (visibly)all platforms.
 THKame depends on [Urho3D](https://github.com/urho3d/Urho3D).
 
-###### Make
+###### Compilation
 First, set the following environment variable:
 ```
 URHO3D_HOME=<Urho3D build directory>
@@ -16,5 +17,6 @@ The details for `URHO3D_HOME` can be found on Urho3D's website. Then, execute th
 ```
 cmake CMakeLists.txt -DLIBDIR_URHO3D:STRING=<Urho3D source directory>
 ```
-Now `make` can be executed to compile the application.
+I highly suggest you make the above two commands into a script.
 
+If you are using GNU Makefiles as your generator, `make` can now be ran to produce the desired binary.
