@@ -20,7 +20,7 @@ void THKame::Setup()
 	engineParameters_["WindowHeight"]=768;
 	engineParameters_["WindowResizable"]=false;
 	engineParameters_["FullScreen"]=false; // true by default
-	engineParameters_["ResourcePaths"]="data";
+	engineParameters_["ResourcePaths"]="resources";
 
 }
 
