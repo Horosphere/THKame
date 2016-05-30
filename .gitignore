@@ -1,9 +1,13 @@
 *.o
 *.obj
+*.swp
+*.pyc
 
 makescript
 Makefile
 CMakeCache.txt
 cmake_install.cmake
+.ycm_extra_conf.py
+.color_coded
 bin/
 CMakeFiles/
