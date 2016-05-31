@@ -19,9 +19,13 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR})
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-# All source files go here:
+# Do not remove the following auto-generated signatures
+
+# Auto-generated. Do not edit. All changes will be undone
 set(SOURCE_FILES
-	${PROJECT_SOURCE_DIR}/thk.cpp)
+    ${PROJECT_SOURCE_DIR}/thk.cpp
+   )
+# Auto-generated end
 
 # All headers are placed beside the sources
 include_directories("${PROJECT_SOURCE_DIR}")
