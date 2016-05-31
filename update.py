@@ -32,8 +32,6 @@ if iBegin == -1 or iEnd == -1 or iBegin > iEnd:
 
 del cMakeFile[iBegin + 1: iEnd]
 
-def isCPPSource(name):
-    f
 autoGen = autoGen_begin
 # Scan src/ directory recursively to gather source files
 for root, subdirs, files in os.walk("./src"): # The root string has length 5

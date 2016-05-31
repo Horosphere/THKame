@@ -19,9 +19,9 @@ cmake CMakeLists.txt -DLIBDIR_URHO3D:STRING=<Urho3D source directory>
 ```
 I highly suggest you make the above two commands into a script.
 
-If you are using GNU Makefiles as your generator, `make` can now be ran to produce the desired binary.
+If you are using GNU Makefiles as your generator, you can now execute `make` to produce the desired binary.
 
-## Development
+## Developing
 
 Each time a new source file is introduced, please run `update.py` to add it to `CMakeLists.txt`
 

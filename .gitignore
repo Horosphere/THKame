@@ -10,5 +10,4 @@ cmake_install.cmake
 .ycm_extra_conf.py
 .color_coded
 bin/
-!bin/resources/
 CMakeFiles/
