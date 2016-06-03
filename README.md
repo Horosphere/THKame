@@ -6,18 +6,15 @@ A STG game with Japanese and American elements
 
 ###### Dependencies
 THKame uses [CMake](https://cmake.org/) to automate the process of linking libraries. It is avaliable on (visibly)all platforms.
-THKame depends on [Urho3D](https://github.com/urho3d/Urho3D).
+THKame depends on [SFML](https://github.com/SFML/SFML).
 
 ###### Compilation
-First, set the following environment variable:
+First, make a symbolic link at `bin/resources` which points to `resources` folder. Or you can simply copy the `resources` folder into `bin/`. Then use the following command:
 ```
-URHO3D_HOME=<Urho3D build directory>
+cmake CMakeLists.txt -DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
+                     -DSFML_LIBRARY_DIR:STRING=<sfml-library-path>
 ```
-The details for `URHO3D_HOME` can be found on Urho3D's website. Then, execute the following in the command line:
-```
-cmake CMakeLists.txt -DLIBDIR_URHO3D:STRING=<Urho3D source directory>
-```
-I highly suggest you make the above two commands into a script.
+I highly suggest you make the above two commands into a script. `<sfml-header-path>` should be a directory with no ending `/` and the directory should contain a `SFML` folder.
 
 If you are using GNU Makefiles as your generator, you can now execute `make` to produce the desired binary.
 

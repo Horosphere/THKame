@@ -1,6 +1,9 @@
 # Execute this script each time you add a new .cpp files in the sources to
 # update CMakeLists.txt
 
+import os, sys
+
+os.chdir(os.path.dirname(os.path.realpath(__file__)));
 fileName = "CMakeLists.txt"
 signature_begin = "# Auto-generated. Do not edit. All changes will be undone\n"
 signature_end = "# Auto-generated end\n"
@@ -8,7 +11,6 @@ autoGen_begin = "set(SOURCE_FILES\n"
 autoGen_padding = "    ${PROJECT_SOURCE_DIR}"
 autoGen_end = "   )\n"
 
-import os, sys
 
 cMakeFile = [] # Lines of CMakeLists.txt
 iBegin = -1 # Indices corresponding to auto-generated sections

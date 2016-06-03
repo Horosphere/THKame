@@ -1,21 +1,21 @@
-# How to use this file:
-# Set URHO3D_HOME to be the place where you built Urho3D. It should contain
-# bin/, include/, and lib/
-# Then, run the following in the command line:
-
-# cmake CMakeLists.txt -DLIBDIR_URHO3D=<URHO3D_SOURCE>
-
-# <URHO3D_SOURCE> is where you extracted Urho3D. It should have a bunch of
-# cmake scripts. I suggest you setup a script for these procedures.
-cmake_minimum_required(VERSION 3.2.3)
-
 project(THKame)
+# How to use this file:
+# 1. Make an environment variable: (You don't have to do this if your
+#    installation is native.
+# LD_LIBRARY_PATH = <sfml-install-path>/lib
+# 2. Execute the following in the command line
+# -DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
+# -DSFML_LIBRARY_DIR:STRING=<sfml-library-path>
 
-set(LIBDIR_URHO3D "~/Urho3D"
-    CACHE STRING "Path to Urho3D source" )
+cmake_minimum_required(VERSION 3.5)
+# SFML_INCLUDE_DIR should have a subdir named SFML
+set(SFML_INCLUDE_DIR "/usr/include"
+  CACHE STRING "Path to SFML headers" )
+set(SFML_LIBRARY_DIR "/usr/lib/x86_64-linux-gnu"
+  CACHE STRING "Path to SFML headers" )
 
 set(PROJECT_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR})
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
@@ -23,26 +23,19 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 # Auto-generated. Do not edit. All changes will be undone
 set(SOURCE_FILES
-    ${PROJECT_SOURCE_DIR}/thk.cpp
+    ${PROJECT_SOURCE_DIR}/main.cpp
+    ${PROJECT_SOURCE_DIR}/core/thkame.cpp
    )
 # Auto-generated end
 
 # All headers are placed beside the sources
-include_directories("${PROJECT_SOURCE_DIR}")
+include_directories("${SFML_INCLUDE_DIR}")
+link_directories(${SFML_LIBRARY_DIR})
 
-# Include Urho3D
-include_directories("$ENV{URHO3D_HOME}/include")
-include_directories("$ENV{URHO3D_HOME}/include/Urho3D/ThirdParty") # Must be included
-set(CMAKE_MODULE_PATH ${LIBDIR_URHO3D}/CMake/Modules)
-include(Urho3D-CMake-common)
-find_package(Urho3D REQUIRED)
-
+# Include SFML
 # Enable C++ 11
 add_compile_options(-std=c++11)
 
-
+add_executable(THKame ${SOURCE_FILES})
 set(TARGET_NAME THKame)
-
-# These are Urho3D specific functions 
-# define_source_files()
-setup_main_executable()
+target_link_libraries(THKame sfml-graphics sfml-window sfml-system)
