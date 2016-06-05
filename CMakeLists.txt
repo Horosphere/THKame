@@ -4,15 +4,16 @@ project(THKame)
 #    installation is native.
 # LD_LIBRARY_PATH = <sfml-install-path>/lib
 # 2. Execute the following in the command line
-# -DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
-# -DSFML_LIBRARY_DIR:STRING=<sfml-library-path>
+# cmake CMakeLists.txt
+#		-DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
+#		-DSFML_LIBRARY_DIR:STRING=<sfml-library-path>
 
 cmake_minimum_required(VERSION 3.5)
 # SFML_INCLUDE_DIR should have a subdir named SFML
 set(SFML_INCLUDE_DIR "/usr/include"
   CACHE STRING "Path to SFML headers" )
 set(SFML_LIBRARY_DIR "/usr/lib/x86_64-linux-gnu"
-  CACHE STRING "Path to SFML headers" )
+  CACHE STRING "Path to SFML library" )
 
 set(PROJECT_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
