@@ -1,26 +1,15 @@
 #include <SFML/Graphics.hpp>
 
+#include "client/thkameclient.hpp"
+
 int main(int argc, char* argv[])
 {
 	(void) argc;
 	(void) argv;
 	
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Touhou Kamechinjiru");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-	
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-		window.clear();
-		window.draw(shape);
-		window.display();
-	}
+	THKLog log("thkame.log");
+	THKameClient client(&log);
+	client.start();
 
 	return 0;
 }
