@@ -24,7 +24,9 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 # Auto-generated. Do not edit. All changes will be undone
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
+    ${PROJECT_SOURCE_DIR}/core/thklog.cpp
     ${PROJECT_SOURCE_DIR}/core/thkame.cpp
+    ${PROJECT_SOURCE_DIR}/client/thkameclient.cpp
    )
 # Auto-generated end
 
