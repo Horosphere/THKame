@@ -1,4 +1,5 @@
-# Execute this script each time you add a new .cpp files in the sources to
+# Author: Horosphere
+# Execute this script each time you add a new source file in src/ to
 # update CMakeLists.txt
 
 import os, sys
@@ -26,7 +27,7 @@ with open(fileName, "r") as file:
         index += 1
 
 if iBegin == -1 or iEnd == -1 or iBegin > iEnd:
-    print("No auto-generated region found in CMakeLists.txt.")
+    print("No auto-generated region found in " + fileName + ".")
     print("Please check that the following lines exist:")
     print(signature_begin[:-1])
     print(signature_end[:-1])

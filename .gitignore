@@ -9,5 +9,6 @@ CMakeCache.txt
 cmake_install.cmake
 .ycm_extra_conf.py
 .color_coded
+.formatGen
 bin/
 CMakeFiles/

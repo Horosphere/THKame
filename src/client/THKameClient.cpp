@@ -1,8 +1,8 @@
-#include "thkameclient.hpp"
+#include "THKameClient.hpp"
 
 THKameClient::THKameClient(THKLog* const log):
 	log(log),
-	window(sf::VideoMode(200, 200), "THKame")
+	window(sf::VideoMode(1280, 960), "THKame")
 {
 	log->write("Initialising THKame Client\n");
 	state.mode = THKameState::MAIN_MENU;
@@ -11,6 +11,12 @@ THKameClient::THKameClient(THKLog* const log):
 
 void THKameClient::start()
 {
+	log->write("Initialising resources\n");
+	if (!rm.init("resources/"))
+	{
+		log->write("Error: Resource initialisation failed");
+		return;
+	}
 	log->write("THKame client starting...\n");
 	while (window.isOpen())
 	{
@@ -32,10 +38,13 @@ void THKameClient::start()
 
 void THKameClient::draw()
 {
+	window.clear();
+	window.draw(rm.sTitle1);
+	
+
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
-	window.clear();
 	window.draw(shape);
 	window.display();
 }

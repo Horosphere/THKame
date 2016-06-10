@@ -1,9 +1,10 @@
-#ifndef THKAMECLIENT_HPP
-#define THKAMECLIENT_HPP
+#ifndef _THKAME_CLIENT_THKAMECLIENT_HPP__
+#define _THKAME_CLIENT_THKAMECLIENT_HPP__
 
 #include <SFML/Graphics.hpp>
 
-#include "../core/thklog.hpp"
+#include "ResourceManager.hpp"
+#include "../core/THKLog.hpp"
 
 struct THKameState final
 {
@@ -28,8 +29,10 @@ private:
 	
 	void draw();
 	THKLog* const log;
+
 	sf::RenderWindow window;
+	ResourceManager rm;
 
 };
 
-#endif // !THKAMECLIENT_HPP
+#endif // !_THKAME_CLIENT_THKAMECLIENT_HPP__

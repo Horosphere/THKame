@@ -8,6 +8,9 @@ project(THKame)
 #		-DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
 #		-DSFML_LIBRARY_DIR:STRING=<sfml-library-path>
 
+IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    message("debug mode")
+  ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
 cmake_minimum_required(VERSION 3.5)
 # SFML_INCLUDE_DIR should have a subdir named SFML
 set(SFML_INCLUDE_DIR "/usr/include"
@@ -25,9 +28,10 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 # Auto-generated. Do not edit. All changes will be undone
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
-    ${PROJECT_SOURCE_DIR}/core/thklog.cpp
-    ${PROJECT_SOURCE_DIR}/core/thkame.cpp
-    ${PROJECT_SOURCE_DIR}/client/thkameclient.cpp
+    ${PROJECT_SOURCE_DIR}/core/THKLog.cpp
+    ${PROJECT_SOURCE_DIR}/core/THKame.cpp
+    ${PROJECT_SOURCE_DIR}/client/ResourceManager.cpp
+    ${PROJECT_SOURCE_DIR}/client/THKameClient.cpp
    )
 # Auto-generated end
 

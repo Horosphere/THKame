@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "client/thkameclient.hpp"
+#include "client/THKameClient.hpp"
 
 int main(int argc, char* argv[])
 {

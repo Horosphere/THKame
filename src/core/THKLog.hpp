@@ -1,5 +1,5 @@
-#ifndef THKLOG_HPP
-#define THKLOG_HPP
+#ifndef _THKAME_CORE_THKLOG_HPP__
+#define _THKAME_CORE_THKLOG_HPP__
 
 #include <iostream>
 #include <fstream>
@@ -30,4 +30,4 @@ inline void THKLog::write(std::string const& data)
 }
 
 
-#endif // !THKLOG_HPP
+#endif // !_THKAME_CORE_THKLOG_HPP__

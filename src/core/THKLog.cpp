@@ -1,4 +1,4 @@
-#include "thklog.hpp"
+#include "THKLog.hpp"
 
 THKLog::~THKLog()
 {
