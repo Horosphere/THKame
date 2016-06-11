@@ -15,9 +15,9 @@ public:
 	{
 		Title0 = 0,
 		Title1,
-		Player0,
-		Player1,
-		Player2,
+		Character0,
+		Character1,
+		Character2,
 
 		SL_KeyConfig,
 		SL_Manual,
@@ -55,10 +55,10 @@ public:
 		return textures[(std::size_t) index];
 	}
 
-	
+	// Sprites
 	sf::Sprite sTitle0;
 	sf::Sprite sTitle1;
-	sf::Sprite sPlayers[3];
+	sf::Sprite sCharacters[3];
 
 	/**
 	 * @param[in] index The texture corresponding to the button. Must lie within

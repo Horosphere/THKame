@@ -27,6 +27,7 @@ public:
 	void start();
 	
 	THKameState state;
+	std::stack<Menu*> menuStack;
 private:
 	
 	void handleEvents();
@@ -39,7 +40,6 @@ private:
 	 */
 	ResourceManager rm;
 
-	std::stack<Menu const*> menuStack;
 
 	// Server
 	THKame* server;

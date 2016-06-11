@@ -14,9 +14,9 @@ bool ResourceManager::init(std::string folder)
 	// Textures
 	INITIALISE_TEXTURE_SIMPLE(Title0, "ui/title_bk00.png");
 	INITIALISE_TEXTURE_SIMPLE(Title1, "ui/title_bk01.png");
-	INITIALISE_TEXTURE_SIMPLE(Player0, "ui/player_00.png");
-	INITIALISE_TEXTURE_SIMPLE(Player1, "ui/player_01.png");
-	INITIALISE_TEXTURE_SIMPLE(Player2, "ui/player_02.png");
+	INITIALISE_TEXTURE_SIMPLE(Character0, "ui/player_00.png");
+	INITIALISE_TEXTURE_SIMPLE(Character1, "ui/player_01.png");
+	INITIALISE_TEXTURE_SIMPLE(Character2, "ui/player_02.png");
 	INITIALISE_TEXTURE_SIMPLE(SL_KeyConfig, "ui/sl/sl_keyconfig.png");
 	INITIALISE_TEXTURE_SIMPLE(SL_Manual, "ui/sl/sl_manual.png");
 	INITIALISE_TEXTURE_SIMPLE(SL_Music, "ui/sl/sl_music.png");
@@ -34,9 +34,9 @@ bool ResourceManager::init(std::string folder)
 	// Sprites
 	sTitle0.setTexture(getTexture(Texture::Title0));
 	sTitle1.setTexture(getTexture(Texture::Title1));
-	sPlayers[0].setTexture(getTexture(Texture::Player0));	
-	sPlayers[1].setTexture(getTexture(Texture::Player1));	
-	sPlayers[2].setTexture(getTexture(Texture::Player2));	
+	sCharacters[0].setTexture(getTexture(Texture::Character0));	
+	sCharacters[1].setTexture(getTexture(Texture::Character1));	
+	sCharacters[2].setTexture(getTexture(Texture::Character2));	
 	for (std::size_t i = (std::size_t)Texture::SL_KeyConfig;
 			i <= (std::size_t)Texture::SL_Weapon; ++i)
 	{

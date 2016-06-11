@@ -2,11 +2,13 @@
 
 #include <iostream>
 
-#include "client.hpp"
-
 THKameClient::THKameClient():
-	window(sf::VideoMode(1280, 960), "THKame")
+	// Using a 1280x960 window since that is the dimension of our BG
+	window(sf::VideoMode(1280, 960), "THKame"),
+	server(nullptr)
 {
+	// Avoid busy waiting in drawing cycles.
+	window.setVerticalSyncEnabled(true);
 	std::cout << "Initialising THKame Client\n";
 	state.mode = THKameState::MAIN_MENU;
 	state.menuSelected = 0;
@@ -63,6 +65,10 @@ void THKameClient::handleEvents()
 			{
 				menuStack.top()->exec(*this);
 			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				menuStack.top()->escape(*this);
+			}
 		}
 	}
 }
@@ -70,24 +76,16 @@ void THKameClient::handleEvents()
 void THKameClient::draw()
 {
 	window.clear();
-
+	
+	if (!menuStack.empty())
+	{
+		menuStack.top()->draw(window, rm, state.menuSelected);
+	}
 	// This needs to be cleaned up
-	if (state.mode == THKameState::MAIN_MENU)
-	{
-		window.draw(rm.sTitle1);
-		sf::Sprite& sButton = rm.getSLButton(ResourceManager::Texture::SL_Option);
-		sButton.setPosition(127.0,127.0);
-		window.draw(sButton);
-
-
-		sf::CircleShape shape(100.f);
-		shape.setFillColor(sf::Color::Green);
-
-		window.draw(shape);
-	}
-	else if (state.mode == THKameState::IN_GAME)
-	{
-	}
+	
+	// Draws a circle
+	// sf::CircleShape shape(100.f);
+	// shape.setFillColor(sf::Color::Green);
 
 	window.display();
 }
