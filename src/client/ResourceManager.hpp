@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class ResourceManager
+class ResourceManager final
 {
 public:
 	/**
@@ -18,6 +18,20 @@ public:
 		Player0,
 		Player1,
 		Player2,
+
+		SL_KeyConfig,
+		SL_Manual,
+		SL_Music,
+		SL_Option,
+		SL_Player,
+		SL_PlayerData,
+		SL_Rank,
+		SL_Regist,
+		SL_Replay,
+		SL_SaveReplay,
+		SL_Spell,
+		SL_Stage,
+		SL_Weapon,
 
 		max
 	};
@@ -44,10 +58,21 @@ public:
 	
 	sf::Sprite sTitle0;
 	sf::Sprite sTitle1;
-	sf::Sprite players[3];
+	sf::Sprite sPlayers[3];
+
+	/**
+	 * @param[in] index The texture corresponding to the button. Must lie within
+	 *	valid range [SL_KeyConfig, SL_Weapon]
+	 */
+	sf::Sprite& getSLButton(Texture index)
+	{
+		return sButtons[(std::size_t)index - (std::size_t)Texture::SL_KeyConfig];
+	}
+	
 	
 private:
 	sf::Texture textures[(std::size_t)Texture::max];
+	sf::Sprite sButtons[(std::size_t)Texture::SL_Weapon - (std::size_t)Texture::SL_KeyConfig + 1];
 
 };
 #endif // !_THKAME_CORE_RESOURCEMANAGER_HPP__

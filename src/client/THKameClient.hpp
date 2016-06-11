@@ -1,10 +1,12 @@
 #ifndef _THKAME_CLIENT_THKAMECLIENT_HPP__
 #define _THKAME_CLIENT_THKAMECLIENT_HPP__
 
+#include <stack>
 #include <SFML/Graphics.hpp>
 
 #include "ResourceManager.hpp"
-#include "../core/THKLog.hpp"
+#include "Menu.hpp"
+#include "../core/THKame.hpp"
 
 struct THKameState final
 {
@@ -20,18 +22,27 @@ struct THKameState final
 class THKameClient final
 {
 public:
-	THKameClient(THKLog* const);
+	THKameClient();
 
 	void start();
 	
-private:
 	THKameState state;
+private:
 	
+	void handleEvents();
 	void draw();
-	THKLog* const log;
 
 	sf::RenderWindow window;
+
+	/*
+	 * This is not const since the draw function makes reference to its sprites.
+	 */
 	ResourceManager rm;
+
+	std::stack<Menu const*> menuStack;
+
+	// Server
+	THKame* server;
 
 };
 

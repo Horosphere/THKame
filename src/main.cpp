@@ -7,8 +7,7 @@ int main(int argc, char* argv[])
 	(void) argc;
 	(void) argv;
 	
-	THKLog log("thkame.log");
-	THKameClient client(&log);
+	THKameClient client;
 	client.start();
 
 	return 0;

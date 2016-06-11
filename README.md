@@ -6,9 +6,14 @@ A STG game with Japanese and American elements
 
 ###### Dependencies
 THKame uses [CMake](https://cmake.org/) to automate the process of linking libraries. It is avaliable on (visibly)all platforms.
-THKame depends on [SFML](https://github.com/SFML/SFML).
+THKame depends on [SFML](https://github.com/SFML/SFML) and Boost 1.61.0.
 
 ###### Compilation
+Make sure that you have the following environment variables set if your boost installation is not native (CMake uses `find_package` to find boost):
+```
+BOOST_ROOT = <libboost>
+BOOST_LIBRARYDIR = <libboost-libraries>
+```
 First, make a symbolic link at `bin/resources` which points to `resources` folder. Or you can simply copy the `resources` folder into `bin/`. Then use the following command:
 ```
 cmake CMakeLists.txt -DSFML_INCLUDE_DIR:STRING=<sfml-header-path>

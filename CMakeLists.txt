@@ -1,8 +1,10 @@
 project(THKame)
 # How to use this file:
-# 1. Make an environment variable: (You don't have to do this if your
+# 1. Create the environment variables: (You don't have to do this if your
 #    installation is native.
 # LD_LIBRARY_PATH = <sfml-install-path>/lib
+# BOOST_ROOT = <libboost>
+# BOOST_LIBRARYDIR = <libboost-libraries>
 # 2. Execute the following in the command line
 # cmake CMakeLists.txt
 #		-DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
@@ -28,9 +30,9 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 # Auto-generated. Do not edit. All changes will be undone
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
-    ${PROJECT_SOURCE_DIR}/core/THKLog.cpp
     ${PROJECT_SOURCE_DIR}/core/THKame.cpp
     ${PROJECT_SOURCE_DIR}/client/ResourceManager.cpp
+    ${PROJECT_SOURCE_DIR}/client/Menu.cpp
     ${PROJECT_SOURCE_DIR}/client/THKameClient.cpp
    )
 # Auto-generated end
@@ -42,6 +44,10 @@ link_directories(${SFML_LIBRARY_DIR})
 # Include SFML
 # Enable C++ 11
 add_compile_options(-std=c++11)
+
+# Include Boost
+find_package(Boost 1.61.0)
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(THKame ${SOURCE_FILES})
 set(TARGET_NAME THKame)
