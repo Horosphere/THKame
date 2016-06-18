@@ -77,6 +77,7 @@ std::size_t MenuPlayer0::getNKeys() const
 }
 void MenuPlayer0::exec(THKameClient& client) const
 {
+	(void) setup;
 	switch (client.state.menuSelected)
 	{
 	case 0:

@@ -40,7 +40,6 @@ private:
 	 */
 	ResourceManager rm;
 
-
 	// Server
 	THKame* server;
 

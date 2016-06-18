@@ -1,14 +1,10 @@
-*.o
-*.obj
-*.swp
+bin
+build
 *.pyc
-
+*.swp
 makescript
-Makefile
-CMakeCache.txt
-cmake_install.cmake
-.ycm_extra_conf.py
-.color_coded
-.formatGen
-bin/
-CMakeFiles/
+
+# Hidden files
+.*
+!/.gitignore
+!/.formatGen

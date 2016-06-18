@@ -1,7 +1,7 @@
 project(THKame)
 # How to use this file:
 # 1. Create the environment variables: (You don't have to do this if your
-#    installation is native.
+#    installation is native.)
 # LD_LIBRARY_PATH = <sfml-install-path>/lib
 # BOOST_ROOT = <libboost>
 # BOOST_LIBRARYDIR = <libboost-libraries>
