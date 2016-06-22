@@ -2,13 +2,13 @@
 
 #include <iostream>
 
-#include "THKameClient.hpp"
+#include "Client.hpp"
 
-Menu::~Menu()
+thk::Menu::~Menu()
 {
 }
 
-void Menu::escape(THKameClient& client) const
+void thk::Menu::escape(Client& client) const
 {
 	delete client.menuStack.top();
 	client.menuStack.pop();
@@ -17,17 +17,16 @@ void Menu::escape(THKameClient& client) const
 
 // MenuMain
 
-std::size_t MenuMain::getNKeys() const
+std::size_t thk::MenuMain::getNKeys() const
 {
 	return 3;
 }
-void MenuMain::exec(THKameClient& client) const
+void thk::MenuMain::exec(Client& client)
 {
 	// Use if-else clause since variables need to be instantiated inside
 	if (client.state.menuSelected == 0)
 	{
-		MenuPlayer0* p0 = new MenuPlayer0(ServerSetup());
-		client.menuStack.push(p0);
+		client.menuStack.push(new MenuDifficulty(ServerSetup()));
 	}
 	else if (client.state.menuSelected == 1)
 	{
@@ -38,12 +37,12 @@ void MenuMain::exec(THKameClient& client) const
 		std::cout << "Options triggered\n";
 	}
 }
-void MenuMain::escape(THKameClient&) const
+void thk::MenuMain::escape(Client&) const
 {
 	// Does nothing since main menu is the highest
 }
 
-void MenuMain::draw(sf::RenderWindow& window,
+void thk::MenuMain::draw(sf::RenderWindow& window,
                     ResourceManager& rm,
                     std::size_t key) const
 {
@@ -71,32 +70,37 @@ void MenuMain::draw(sf::RenderWindow& window,
 }
 
 
-std::size_t MenuPlayer0::getNKeys() const
+// Character selection menus
+void thk::MenuDifficulty::exec(Client& client)
 {
-	return 3;
+	setup.difficulty = client.state.menuSelected;
+	client.menuStack.push(new MenuCharacter(setup));
 }
-void MenuPlayer0::exec(THKameClient& client) const
-{
-	(void) setup;
-	switch (client.state.menuSelected)
-	{
-	case 0:
-		std::cout << "Player0 triggered\n";
-		break;
-	case 1:
-		std::cout << "Player1 triggered\n";
-		break;
-	case 2:
-		std::cout << "Player2 triggered\n";
-	}
-}
-
-void MenuPlayer0::draw(sf::RenderWindow& window,
+void thk::MenuDifficulty::draw(sf::RenderWindow& window,
                        ResourceManager& rm,
                        std::size_t key) const
 {
 	window.draw(rm.sTitle1);
-	(void) key;
+	// Start at 240, 224
+	rm.sDifficultiesInactive.setPosition(240, 224);
+	window.draw(rm.sDifficultiesInactive);
+	rm.sDifficultiesActive.setTextureRect(sf::IntRect(0, 160 * key, 512, 160));
+	rm.sDifficultiesActive.setPosition(240, 224 + 160 * key);
+	window.draw(rm.sDifficultiesActive);
+
+	
+}
+void thk::MenuCharacter::exec(Client& client)
+{
+	setup.player = client.state.menuSelected;
+	client.menuStack.push(new MenuWeapon(setup));
+}
+
+void thk::MenuCharacter::draw(sf::RenderWindow& window,
+                       ResourceManager& rm,
+                       std::size_t key) const
+{
+	window.draw(rm.sTitle1);
 	sf::Sprite* sButton;
 
 	// Start at 240, 224
@@ -104,6 +108,29 @@ void MenuPlayer0::draw(sf::RenderWindow& window,
 	for (std::size_t i = 0; i < getNKeys(); ++i)
 	{
 		sButton = &rm.sCharacters[i];
+		sButton->setPosition(startX + (int)i * 800, 224);
+		window.draw(*sButton);
+	}
+	
+}
+
+void thk::MenuWeapon::exec(Client& client)
+{
+	(void) client;
+}
+
+void thk::MenuWeapon::draw(sf::RenderWindow& window,
+                       ResourceManager& rm,
+                       std::size_t key) const
+{
+	window.draw(rm.sTitle1);
+	sf::Sprite* sButton;
+
+	// Start at 240, 224
+	int startX = 240 - (int) key * 800;
+	for (std::size_t i = 0; i < getNKeys(); ++i)
+	{
+		sButton = &rm.sWeapons[i + setup.player * 2];
 		sButton->setPosition(startX + (int)i * 800, 224);
 		window.draw(*sButton);
 	}

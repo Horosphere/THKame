@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace thk
+{
+
 class ResourceManager final
 {
 public:
@@ -15,9 +18,16 @@ public:
 	{
 		Title0 = 0,
 		Title1,
+		Difficulties,
 		Character0,
 		Character1,
 		Character2,
+		Weapon0,
+		Weapon0b,
+		Weapon1,
+		Weapon1b,
+		Weapon2,
+		Weapon2b,
 
 		SL_KeyConfig,
 		SL_Manual,
@@ -58,7 +68,10 @@ public:
 	// Sprites
 	sf::Sprite sTitle0;
 	sf::Sprite sTitle1;
+	sf::Sprite sDifficultiesInactive;
+	sf::Sprite sDifficultiesActive;
 	sf::Sprite sCharacters[3];
+	sf::Sprite sWeapons[6];
 
 	/**
 	 * @param[in] index The texture corresponding to the button. Must lie within
@@ -75,4 +88,7 @@ private:
 	sf::Sprite sButtons[(std::size_t)Texture::SL_Weapon - (std::size_t)Texture::SL_KeyConfig + 1];
 
 };
+
+} // namespace thk
+
 #endif // !_THKAME_CORE_RESOURCEMANAGER_HPP__

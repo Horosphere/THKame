@@ -6,7 +6,9 @@
 #include "ResourceManager.hpp"
 #include "../core/ServerSetup.hpp"
 
-class THKameClient;
+namespace thk
+{
+class Client;
 
 /**
  * Class for a menu in THKame.
@@ -28,16 +30,17 @@ public:
 	 * "Click" on the menu item. The entire state of the client is passed to do
 	 * useful work.
 	 */
-	virtual void exec(THKameClient&) const = 0;
+	virtual void exec(Client&) = 0;
 	/**
 	 * Triggered when Esc key is pressed.
 	 * The default behaviour is to delete the top element of the menu stack.
 	 * a.k.a. self-destroy. This is overridden by the main menu.
 	 */
-	virtual void escape(THKameClient&) const;
+	virtual void escape(Client&) const;
 	virtual void draw(sf::RenderWindow&, ResourceManager&,
 			std::size_t selected) const = 0;
 };
+
 
 /**
  * The main menu. Does not explicitly store a state
@@ -45,36 +48,74 @@ public:
 class MenuMain final: public Menu
 {
 public:
-	virtual std::size_t getNKeys() const;
-	virtual void exec(THKameClient&) const;
-	virtual void escape(THKameClient&) const;
+	virtual std::size_t getNKeys() const override;
+	virtual void exec(Client&) override;
+	virtual void escape(Client&) const override;
 	virtual void draw(sf::RenderWindow&, ResourceManager&,
-			std::size_t selected) const;
+			std::size_t selected) const override;
 
 private:
 };
 
-/**
- * The first (Hence 0) level menu for selecting a player.
- */
-class MenuPlayer0 final: public Menu
+class MenuDifficulty final: public Menu
 {
 public:
 	// The ServerSetup object is passed on to further submenues.
-	MenuPlayer0(ServerSetup);
+	MenuDifficulty(ServerSetup);
 
-	virtual std::size_t getNKeys() const;
-	virtual void exec(THKameClient&) const;
+	virtual std::size_t getNKeys() const override { return 4; }
+	virtual void exec(Client&) override;
 	virtual void draw(sf::RenderWindow&, ResourceManager&,
-			std::size_t selected) const;
+			std::size_t selected) const override;
+
+private:
+	ServerSetup setup;
+};
+/**
+ * The first (Hence 0) level menu for selecting a player.
+ */
+class MenuCharacter final: public Menu
+{
+public:
+	// The ServerSetup object is passed on to further submenues.
+	MenuCharacter(ServerSetup);
+
+	virtual std::size_t getNKeys() const override { return 3; }
+	virtual void exec(Client&) override;
+	virtual void draw(sf::RenderWindow&, ResourceManager&,
+			std::size_t selected) const override;
+
+private:
+	ServerSetup setup;
+};
+class MenuWeapon final: public Menu
+{
+public:
+	// The ServerSetup object is passed on to further submenues.
+	MenuWeapon(ServerSetup);
+
+	virtual std::size_t getNKeys() const override { return 2; }
+	virtual void exec(Client&) override;
+	virtual void draw(sf::RenderWindow&, ResourceManager&,
+			std::size_t selected) const override ;
 
 private:
 	ServerSetup setup;
 };
 
+} // namespace thk
+
 // Implementations
 
-inline MenuPlayer0::MenuPlayer0(ServerSetup setup):
+inline thk::MenuCharacter::MenuCharacter(ServerSetup setup):
+	setup(setup)
+{
+}
+inline thk::MenuWeapon::MenuWeapon(ServerSetup setup):
+	setup(setup)
+{
+}
+inline thk::MenuDifficulty::MenuDifficulty(ServerSetup setup):
 	setup(setup)
 {
 }

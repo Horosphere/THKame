@@ -1,13 +1,13 @@
 #include <SFML/Graphics.hpp>
 
-#include "client/THKameClient.hpp"
+#include "client/Client.hpp"
 
 int main(int argc, char* argv[])
 {
 	(void) argc;
 	(void) argv;
 	
-	THKameClient client;
+	thk::Client client;
 	client.start();
 
 	return 0;

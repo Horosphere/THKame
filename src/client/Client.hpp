@@ -1,14 +1,17 @@
-#ifndef _THKAME_CLIENT_THKAMECLIENT_HPP__
-#define _THKAME_CLIENT_THKAMECLIENT_HPP__
+#ifndef _THKAME_CLIENT_CLIENT_HPP__
+#define _THKAME_CLIENT_CLIENT_HPP__
 
 #include <stack>
 #include <SFML/Graphics.hpp>
 
 #include "ResourceManager.hpp"
 #include "Menu.hpp"
-#include "../core/THKame.hpp"
+#include "../core/Server.hpp"
 
-struct THKameState final
+namespace thk
+{
+
+struct ClientState final
 {
 	enum
 	{
@@ -19,14 +22,14 @@ struct THKameState final
 
 };
 
-class THKameClient final
+class Client final
 {
 public:
-	THKameClient();
+	Client();
 
 	void start();
 	
-	THKameState state;
+	ClientState state;
 	std::stack<Menu*> menuStack;
 private:
 	
@@ -41,8 +44,10 @@ private:
 	ResourceManager rm;
 
 	// Server
-	THKame* server;
+	Server* server;
 
 };
 
-#endif // !_THKAME_CLIENT_THKAMECLIENT_HPP__
+} // namespace thk
+
+#endif // !_THKAME_CLIENT_CLIENT_HPP__

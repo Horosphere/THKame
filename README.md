@@ -6,7 +6,7 @@ A STG game with Japanese and American elements
 
 ###### Dependencies
 THKame uses [CMake](https://cmake.org/) to automate the process of linking
-libraries. It is avaliable on (visibly)all platforms.
+libraries. It is avaliable on (visibly) all platforms.
 THKame depends on [SFML](https://github.com/SFML/SFML) and Boost 1.61.0.
 
 ###### Compilation
@@ -27,9 +27,6 @@ cmake ..
 `<sfml-header-path>` should be a directory with no ending `/` and the directory
 should contain a `SFML` folder.
 
-If you are using GNU Makefiles as your generator, you can now execute `make` to
-produce the desired binary.
-
 ## Developing
 
 Each time a new source file is introduced, please run `update.py` to add it to
@@ -39,9 +36,12 @@ The source files are formatted according to the following `astyle`
 configuration:
 ```
 --style=allman
---indent=tab
+--align-pointer=type	
+--close-templates
+--convert-tabs
 --indent-preproc-block
+--indent-preproc-define
+--indent=tab=2
 --pad-header
 --unpad-paren
---align-pointer=type	
 ```
