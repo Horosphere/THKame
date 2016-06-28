@@ -1,6 +1,6 @@
 # Touhou Kamechinjiru 東方亀珍汁
 
-A STG game with Japanese and American elements
+A STG game about Anikis. Inspired by THP.
 
 ## Building
 
