@@ -27,6 +27,11 @@ class Client final
 public:
 	Client();
 
+	/**
+	 * @brief Launches the server in another thread. The server must not be
+	 *	running. Pops all menus from the menu stack.
+	 */
+	void launchServer(Server*);
 	void start();
 	
 	ClientState state;

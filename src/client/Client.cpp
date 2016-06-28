@@ -1,6 +1,10 @@
 #include "Client.hpp"
 
 #include <iostream>
+#include <thread>
+#include <boost/thread.hpp>
+
+#include "MenuMain.hpp"
 
 thk::Client::Client():
 	// Using a 1280x960 window since that is the dimension of our BG
@@ -14,6 +18,18 @@ thk::Client::Client():
 	state.menuSelected = 0;
 }
 
+void thk::Client::launchServer(Server* s)
+{
+	// Removes all menus from the menu stack
+	while (!menuStack.empty())
+	{
+		delete menuStack.top();
+		menuStack.pop();
+	}
+	server = s;
+	std::thread serverThread(&Server::start, server);
+	serverThread.detach();
+}
 void thk::Client::start()
 {
 	if (!rm.init("resources/"))
@@ -52,8 +68,15 @@ void thk::Client::handleEvents()
 		{
 			if (menuStack.empty()) // Server must be up
 			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
+				{
+					// Do not delete the server here. The server deletes itself.
+					server->stop();
+					server = nullptr;
+					menuStack.push(new MenuMain);
+				}
 			}
-			else // Server offline
+			else // Server offline or not receiving keyboard instructions.
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ||
 						sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -85,15 +108,16 @@ void thk::Client::draw()
 {
 	window.clear();
 
+	if (server)
+	{
+		
+	}
 	if (!menuStack.empty())
 	{
 		menuStack.top()->draw(window, rm, state.menuSelected);
 	}
 	// This needs to be cleaned up
 
-	// Draws a circle
-	// sf::CircleShape shape(100.f);
-	// shape.setFillColor(sf::Color::Green);
 
 	window.display();
 }
