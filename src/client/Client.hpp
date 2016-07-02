@@ -51,6 +51,8 @@ private:
 	// Server
 	Server* server;
 
+	// Sprites (Server)
+	sf::Sprite spriteTest;
 };
 
 } // namespace thk

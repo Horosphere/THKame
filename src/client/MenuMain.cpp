@@ -34,25 +34,29 @@ void thk::MenuMain::draw(sf::RenderWindow& window,
                     ResourceManager& rm,
                     std::size_t key) const
 {
-	static ResourceManager::Texture const keys[] =
+	constexpr int const left = 180;
+	constexpr int const top = 200;
+	constexpr int const step = 140;
+
+	static Texture const buttons[] =
 	{
-		ResourceManager::Texture::SL_Player,
-		ResourceManager::Texture::SL_Music,
-		ResourceManager::Texture::SL_Option
+		Texture::SL_Player,
+		Texture::SL_Music,
+		Texture::SL_Option
 	};
-	window.draw(rm.sTitle0);
-	// Buttons start at 180, 200
-	(void) key;
-	sf::Sprite* sButton;
+	window.draw(sf::Sprite(rm.getTexture(Texture::Title0)));
+	sf::Sprite sprite;
 	for (std::size_t i = 0; i < getNKeys(); ++i)
 	{
-		sButton = &rm.getSLButton(keys[i]);
-		sButton->setPosition(180, 200 + (int)i * 140);
+		sprite.setTexture(rm.getTexture(buttons[i]));
+		sprite.setPosition(left, top + (int)i * step);
+
+		// Enlarge the selected button
 		if (i == key)
-			sButton->setScale(1.1f, 1.1f);
+			sprite.setScale(1.1f, 1.1f);
 		else
-			sButton->setScale(1.f, 1.f);
-		window.draw(*sButton);
+			sprite.setScale(1.f, 1.f);
+		window.draw(sprite);
 	}
 
 }

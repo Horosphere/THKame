@@ -6,14 +6,6 @@
 namespace thk
 {
 
-class ResourceManager final
-{
-public:
-	/**
-	 * This enum struct is used to index an array of textures.
-	 *
-	 * The last element Texture::max is the number of valid elements in the enum.
-	 */
 	enum struct Texture
 	{
 		Title0 = 0,
@@ -45,6 +37,14 @@ public:
 
 		max
 	};
+class ResourceManager final
+{
+public:
+	/**
+	 * This enum struct is used to index an array of textures.
+	 *
+	 * The last element Texture::max is the number of valid elements in the enum.
+	 */
 	ResourceManager();
 
 	/**
@@ -56,7 +56,7 @@ public:
 	bool init(std::string folder);
 
 	/**
-	 * Queries a texture based on a enumeration index.
+	 * Quaries a texture based on a enumeration index.
 	 *
 	 * @return The texture. Must be sf::Texture const&. Otherwise problems occur.
 	 */
@@ -66,26 +66,8 @@ public:
 	}
 
 	// Sprites
-	sf::Sprite sTitle0;
-	sf::Sprite sTitle1;
-	sf::Sprite sDifficultiesInactive;
-	sf::Sprite sDifficultiesActive;
-	sf::Sprite sCharacters[3];
-	sf::Sprite sWeapons[6];
-
-	/**
-	 * @param[in] index The texture corresponding to the button. Must lie within
-	 *	valid range [SL_KeyConfig, SL_Weapon]
-	 */
-	sf::Sprite& getSLButton(Texture index)
-	{
-		return sButtons[(std::size_t)index - (std::size_t)Texture::SL_KeyConfig];
-	}
-	
-	
 private:
 	sf::Texture textures[(std::size_t)Texture::max];
-	sf::Sprite sButtons[(std::size_t)Texture::SL_Weapon - (std::size_t)Texture::SL_KeyConfig + 1];
 
 };
 

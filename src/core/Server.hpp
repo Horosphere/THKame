@@ -2,6 +2,8 @@
 #define _THKAME_CORE_SERVER_HPP__
 
 #include <mutex>
+#include <chrono>
+
 #include <boost/lockfree/spsc_queue.hpp>
 
 #include "ServerSetup.hpp"
@@ -11,7 +13,6 @@ namespace thk
 
 enum struct Command
 {
-	Exit = 0,
 	Up,
 	Down,
 	Left,
@@ -54,6 +55,8 @@ public:
 	 * @brief Pushes a command into the command queue.
 	 */
 	void pushCommand(Command);
+
+	double pX, pY;
 private:
 	ServerSetup setup;
 
@@ -62,7 +65,10 @@ private:
 	// A 16 element queue should be enough
 	boost::lockfree::spsc_queue<Command, boost::lockfree::capacity<16>> commandQueue;
 	std::mutex pauseMutex;
+
+	// Dynamic variables
 	bool running;
+	std::chrono::time_point<std::chrono::steady_clock> timeStamp;
 };
 
 

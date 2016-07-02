@@ -25,9 +25,7 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-# Include SFML
-# Enable C++ 11
-add_compile_options(-std=c++11)
+add_compile_options(-std=c++14)
 
 # Include Boost
 find_package(Boost 1.61.0 COMPONENTS thread REQUIRED)

@@ -11,18 +11,26 @@ void thk::MenuDifficulty::exec(Client& client)
 	client.menuStack.push(new MenuCharacter(setup));
 }
 void thk::MenuDifficulty::draw(sf::RenderWindow& window,
-                       ResourceManager& rm,
-                       std::size_t key) const
+                               ResourceManager& rm,
+                               std::size_t key) const
 {
-	window.draw(rm.sTitle1);
-	// Start at 240, 224
-	rm.sDifficultiesInactive.setPosition(240, 224);
-	window.draw(rm.sDifficultiesInactive);
-	rm.sDifficultiesActive.setTextureRect(sf::IntRect(0, 160 * key, 512, 160));
-	rm.sDifficultiesActive.setPosition(240, 224 + 160 * key);
-	window.draw(rm.sDifficultiesActive);
+	constexpr int const left = 240;
+	constexpr int const top = 224;
 
-	
+	window.draw(sf::Sprite(rm.getTexture(Texture::Title1)));
+
+	// Draw inactive menu
+	sf::Sprite sprite(rm.getTexture(Texture::Difficulties));
+	sprite.setTextureRect(sf::IntRect(512, 0, 640, 1024));
+	sprite.setPosition(left, top);
+	window.draw(sprite);
+
+	// Draw active menu option.
+	sprite.setTextureRect(sf::IntRect(0, 160 * key, 512, 160));
+	sprite.setPosition(left, top + 160 * key);
+	window.draw(sprite);
+
+
 }
 void thk::MenuCharacter::exec(Client& client)
 {
@@ -32,21 +40,34 @@ void thk::MenuCharacter::exec(Client& client)
 }
 
 void thk::MenuCharacter::draw(sf::RenderWindow& window,
-                       ResourceManager& rm,
-                       std::size_t key) const
+                              ResourceManager& rm,
+                              std::size_t key) const
 {
-	window.draw(rm.sTitle1);
-	sf::Sprite* sButton;
+	constexpr int const left = 240;
+	constexpr int const top = 224;
+	constexpr int const step = 800;
+	static Texture const buttons[] =
+	{
+		Texture::Character0,
+		Texture::Character1,
+		Texture::Character2
+	};
+
+	window.draw(sf::Sprite(rm.getTexture(Texture::Title1)));
+
+	sf::Sprite sprite;
 
 	// Start at 240, 224
-	int startX = 240 - (int) key * 800;
+	int x = left - (int) key * step;
+
 	for (std::size_t i = 0; i < getNKeys(); ++i)
 	{
-		sButton = &rm.sCharacters[i];
-		sButton->setPosition(startX + (int)i * 800, 224);
-		window.draw(*sButton);
+		sprite.setTexture(rm.getTexture(buttons[i]));
+		sprite.setPosition(x, top);
+		window.draw(sprite);
+		x += step;
 	}
-	
+
 }
 
 void thk::MenuWeapon::exec(Client& client)
@@ -59,19 +80,32 @@ void thk::MenuWeapon::exec(Client& client)
 }
 
 void thk::MenuWeapon::draw(sf::RenderWindow& window,
-                       ResourceManager& rm,
-                       std::size_t key) const
+                           ResourceManager& rm,
+                           std::size_t key) const
 {
-	window.draw(rm.sTitle1);
-	sf::Sprite* sButton;
+	constexpr int const left = 240;
+	constexpr int const top = 224;
+	constexpr int const step = 800;
+	static Texture const buttons[] =
+	{
+		Texture::Weapon0,
+		Texture::Weapon0b,
+		Texture::Weapon1,
+		Texture::Weapon1b,
+		Texture::Weapon2,
+		Texture::Weapon2b
+	};
 
-	// Start at 240, 224
-	int startX = 240 - (int) key * 800;
+
+	window.draw(sf::Sprite(rm.getTexture(Texture::Title1)));
+	sf::Sprite sprite;
+
+	int startX = left - (int) key * step;
 	for (std::size_t i = 0; i < getNKeys(); ++i)
 	{
-		sButton = &rm.sWeapons[i + setup.player * 2];
-		sButton->setPosition(startX + (int)i * 800, 224);
-		window.draw(*sButton);
+		sprite.setTexture(rm.getTexture(buttons[i + setup.player * 2]));
+		sprite.setPosition(startX + (int)i * step, top);
+		window.draw(sprite);
 	}
-	
+
 }

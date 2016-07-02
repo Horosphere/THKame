@@ -37,6 +37,7 @@ void thk::Client::start()
 		std::cout << "Resource Initialisation failed\n";
 		return;
 	}
+	spriteTest.setTexture(rm.getTexture(Texture::SL_Rank));
 	std::cout << "THKame client starting...\n";
 	// Push Main menu into the menu stack
 	menuStack.push(new MenuMain);
@@ -75,6 +76,14 @@ void thk::Client::handleEvents()
 					server = nullptr;
 					menuStack.push(new MenuMain);
 				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+					server->pushCommand(Command::Up);
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+					server->pushCommand(Command::Down);
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+					server->pushCommand(Command::Left);
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+					server->pushCommand(Command::Right);
 			}
 			else // Server offline or not receiving keyboard instructions.
 			{
@@ -110,7 +119,8 @@ void thk::Client::draw()
 
 	if (server)
 	{
-		
+		spriteTest.setPosition(server->pX, server->pY);
+		window.draw(spriteTest);
 	}
 	if (!menuStack.empty())
 	{
