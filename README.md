@@ -21,11 +21,7 @@ folder. Or you can simply copy the `resources` folder into `bin/`. Then create
 a subdirectory `build/` and execute:
 ```
 cmake ..
-	-DSFML_INCLUDE_DIR:STRING=<sfml-header-path>
-	-DSFML_LIBRARY_DIR:STRING=<sfml-library-path>
 ```
-`<sfml-header-path>` should be a directory with no ending `/` and the directory
-should contain a `SFML` folder.
 
 ## Developing
 
