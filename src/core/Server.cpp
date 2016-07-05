@@ -5,11 +5,16 @@
 thk::Server::Server(ServerSetup setup, Danmaku const* const danmaku): 
 	setup(setup), danmaku(danmaku), running(false)
 {
+	world.setBoundary(600, 600);
 }
 
 void thk::Server::start()
 {
-	pX = pY = 0.0;
+	player.pX = player.pY = 0.0;
+	Bullet playerBullet;
+	playerBullet.vX = 0.0;
+	playerBullet.vY = -50.0;
+
 	/*
 	 * "Minimal Loop Duration": The minimum time for one loop
 	 */
@@ -18,25 +23,38 @@ void thk::Server::start()
 	while (running)
 	{
 		timeStamp = std::chrono::steady_clock::now();
+		
+		std::vector<Bullet> bullets;
+		
 		Command command;
 		while (commandQueue.pop(command))
 		{
 			switch (command)
 			{
 			case Command::Up:
-				pY -= 10.0;
+				player.pY -= 10.0;
 				break;
 			case Command::Down:
-				pY += 10.0;
+				player.pY += 10.0;
 				break;
 			case Command::Left:
-				pX -= 10.0;
+				player.pX -= 10.0;
 				break;
 			case Command::Right:
-				pX += 10.0;
+				player.pX += 10.0;
+				break;
+			case Command::Emit:
+				playerBullet.index = 0;
+				playerBullet.pX = player.pX;
+				playerBullet.pY = player.pY;
+				bullets.push_back(playerBullet);
 				break;
 			}
 		}
+
+		world.insertBullets(bullets);
+		world.tick();
+		
 		pauseMutex.lock();
 		pauseMutex.unlock();
 

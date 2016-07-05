@@ -106,6 +106,8 @@ void thk::Client::handleEvents()
 					server->pushCommand(Command::Left);
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 					server->pushCommand(Command::Right);
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+					server->pushCommand(Command::Emit);
 			}
 			else // Server offline or not receiving keyboard instructions.
 			{
@@ -139,10 +141,19 @@ void thk::Client::draw()
 {
 	window.clear();
 
+	sf::CircleShape shape(20.0f);
+	shape.setFillColor(sf::Color::Green);
+
 	if (server)
 	{
-		spriteTest.setPosition(server->pX, server->pY);
+		spriteTest.setPosition(server->player.pX, server->player.pY);
 		window.draw(spriteTest);
+
+		for (Bullet& bullet: server->world.bullets)
+		{
+			shape.setPosition(bullet.pX - 10.f, bullet.pY - 10.f);
+			window.draw(shape);
+		}
 	}
 	if (!menuStack.empty())
 	{

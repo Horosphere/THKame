@@ -9,6 +9,7 @@
 
 #include "ServerSetup.hpp"
 #include "Danmaku.hpp"
+#include "../world/World.hpp"
 
 namespace thk
 {
@@ -18,7 +19,13 @@ enum struct Command
 	Up,
 	Down,
 	Left,
-	Right
+	Right,
+	Emit
+};
+
+struct Player final
+{
+	double pX, pY;
 };
 
 class Server final
@@ -55,7 +62,8 @@ public:
 	 */
 	void pushCommand(Command);
 
-	double pX, pY;
+	Player player;
+	World world;
 private:
 	ServerSetup const setup;
 	Danmaku const* const danmaku;

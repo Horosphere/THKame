@@ -5,43 +5,28 @@
 #include <vector>
 #include <string>
 
+#include "../world/worlddefs.hpp"
+
 namespace thk
 {
 
 class Danmaku final
 {
 public:
-	/**
-	 * @brief Each instance of Bullet represents a type of bullets. This struct
-	 *	only stores invariant properties about a bullet and does not store
-	 *	position/velocity.
-	 */
-	struct Bullet final
-	{
-		enum HitType
-		{
-			Circle,
-			Line
-		};
-
-		std::string name;
-		HitType hitType;
-		double hitRadius;
-	};
 	Danmaku();
 	/**
 	 * Loads Danmaku configuration from XML stream
 	 */
 	void load(std::istream& stream);
 
-	std::vector<Bullet> bullets;
+	std::vector<BulletClass> bulletClasses;
+	std::vector<EntityClass> entityClasses;
 };
 
 
 } // namespace thk
 
 // Implementations
-
 
 
 
