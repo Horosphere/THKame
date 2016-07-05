@@ -1,7 +1,6 @@
 #include "MenuCharacter.hpp"
 
 #include "Client.hpp"
-#include "../core/Server.hpp"
 
 // Character selection menus
 void thk::MenuDifficulty::exec(Client& client)
@@ -29,7 +28,6 @@ void thk::MenuDifficulty::draw(sf::RenderWindow& window,
 	sprite.setTextureRect(sf::IntRect(0, 160 * key, 512, 160));
 	sprite.setPosition(left, top + 160 * key);
 	window.draw(sprite);
-
 
 }
 void thk::MenuCharacter::exec(Client& client)
@@ -75,8 +73,7 @@ void thk::MenuWeapon::exec(Client& client)
 	setup.weapon = client.state.menuSelected;
 	client.state.menuSelected = 0;
 	// Initialise the server
-	Server* server = new Server(setup);
-	client.launchServer(server);
+	client.launchServer(setup);
 }
 
 void thk::MenuWeapon::draw(sf::RenderWindow& window,

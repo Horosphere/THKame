@@ -1,12 +1,14 @@
 #ifndef _THKAME_CORE_SERVER_HPP__
 #define _THKAME_CORE_SERVER_HPP__
 
+#include <atomic>
 #include <mutex>
 #include <chrono>
 
 #include <boost/lockfree/spsc_queue.hpp>
 
 #include "ServerSetup.hpp"
+#include "Danmaku.hpp"
 
 namespace thk
 {
@@ -19,16 +21,13 @@ enum struct Command
 	Right
 };
 
-/**
- * @brief The core of THKame. This thread is responsible for handling in term
- */
 class Server final
 {
 public:
 	/**
 	 * @warning Servers should only be created using new and deleted with stop().
 	 */
-	Server(ServerSetup);
+	Server(ServerSetup, Danmaku const* const);
 
 	/**
 	 * @brief Starts the Server loop. This should be ran in a different thread.
@@ -58,7 +57,8 @@ public:
 
 	double pX, pY;
 private:
-	ServerSetup setup;
+	ServerSetup const setup;
+	Danmaku const* const danmaku;
 
 	// Dynamic
 	
@@ -67,7 +67,7 @@ private:
 	std::mutex pauseMutex;
 
 	// Dynamic variables
-	bool running;
+	std::atomic_bool running;
 	std::chrono::time_point<std::chrono::steady_clock> timeStamp;
 };
 

@@ -1,0 +1,17 @@
+<environment> <!-- Bullets, etc. -->
+	<bullet>
+		<Name>BuLi</Name>
+		<HitType>Circle</HitType>
+		<HitRadius>12</HitRadius>
+	</bullet>
+	<bullet> 
+		<Name>MeLi</Name>
+		<HitType>Line</HitType>
+		<HitRadius>15</HitRadius>
+	</bullet>
+</environment>
+<levels> <!-- Currently not implemented -->
+	<level>
+		<Name>Level 1</Name>
+	</level>
+</levels>

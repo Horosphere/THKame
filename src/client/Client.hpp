@@ -31,7 +31,7 @@ public:
 	 * @brief Launches the server in another thread. The server must not be
 	 *	running. Pops all menus from the menu stack.
 	 */
-	void launchServer(Server*);
+	void launchServer(ServerSetup);
 	void start();
 	
 	ClientState state;
@@ -49,6 +49,7 @@ private:
 	ResourceManager rm;
 
 	// Server
+	Danmaku danmaku;
 	Server* server;
 
 	// Sprites (Server)

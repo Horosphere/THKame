@@ -2,7 +2,8 @@
 
 #include <thread>
 
-thk::Server::Server(ServerSetup setup): setup(setup), running(false)
+thk::Server::Server(ServerSetup setup, Danmaku const* const danmaku): 
+	setup(setup), danmaku(danmaku), running(false)
 {
 }
 

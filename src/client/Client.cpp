@@ -3,6 +3,8 @@
 #include <iostream>
 #include <thread>
 #include <boost/thread.hpp>
+#include <fstream>
+#include <exception>
 
 #include "MenuMain.hpp"
 
@@ -13,12 +15,12 @@ thk::Client::Client():
 {
 	// Avoid busy waiting in drawing cycles.
 	window.setVerticalSyncEnabled(true);
-	std::cout << "Initialising THKame Client\n";
+	std::cout << "Initialising THKame Client" << std::endl;
 	state.mode = ClientState::MAIN_MENU;
 	state.menuSelected = 0;
 }
 
-void thk::Client::launchServer(Server* s)
+void thk::Client::launchServer(ServerSetup setup)
 {
 	// Removes all menus from the menu stack
 	while (!menuStack.empty())
@@ -26,18 +28,38 @@ void thk::Client::launchServer(Server* s)
 		delete menuStack.top();
 		menuStack.pop();
 	}
-	server = s;
+	server = new Server(setup, &danmaku);
 	std::thread serverThread(&Server::start, server);
 	serverThread.detach();
 }
+
 void thk::Client::start()
 {
 	if (!rm.init("resources/"))
 	{
-		std::cout << "Resource Initialisation failed\n";
+		std::cout << "Resource Initialisation failed" << std::endl;
 		return;
 	}
+	std::ifstream danmakuConfig;
+	danmakuConfig.open("resources/danmaku.xml", std::ifstream::in);
+	if (!danmakuConfig.is_open())
+	{
+		std::cout << "Danmaku initialisation failed" << std::endl;
+		return;
+	}
+	try
+	{
+		danmaku.load(danmakuConfig);
+	}
+	catch (std::runtime_error& error)
+	{
+		std::cout << "Unable to parse danmaku: " << error.what() << std::endl;
+	}
+	danmakuConfig.close();
+
 	spriteTest.setTexture(rm.getTexture(Texture::SL_Rank));
+
+
 	std::cout << "THKame client starting...\n";
 	// Push Main menu into the menu stack
 	menuStack.push(new MenuMain);
