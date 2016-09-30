@@ -24,7 +24,8 @@ public:
 	          Resources const&) const;
 
 private:
-	float pos;
+	float posX, posY;
+
 	float fps;
 };
 
