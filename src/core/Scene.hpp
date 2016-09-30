@@ -3,19 +3,29 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Resources.hpp"
+
 namespace thk
 {
 
 class Scene final
 {
 public:
+	Scene();
+
 	/**
 	 * @return true if Scene exited successfully. false if window is closed.
 	 */
-	bool start(sf::RenderWindow* const, int nThreads);
+	bool start(sf::RenderWindow* const,
+	           Resources const&,
+	           int nThreads);
 
-	void draw(sf::RenderWindow* const);
+	void draw(sf::RenderWindow* const,
+	          Resources const&) const;
 
+private:
+	float pos;
+	float fps;
 };
 
 

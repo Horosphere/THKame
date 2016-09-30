@@ -39,6 +39,7 @@ add_compile_options(-std=c++14)
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
     ${PROJECT_SOURCE_DIR}/core/Scene.cpp
+    ${PROJECT_SOURCE_DIR}/core/Resources.cpp
    )
 # Auto-generated end
 
@@ -46,4 +47,5 @@ add_executable(THKame ${SOURCE_FILES})
 set(TARGET_NAME THKame)
 target_link_libraries(THKame ${Boost_LIBRARIES})
 target_link_libraries(THKame sfml-graphics sfml-window sfml-system)
+target_link_libraries(THKame m)
 target_link_libraries(THKame ${CMAKE_THREAD_LIBS_INIT})
