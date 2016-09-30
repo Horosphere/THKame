@@ -1,5 +1,5 @@
-#ifndef _THKAME_CORE_TEXT_HPP__
-#define _THKAME_CORE_TEXT_HPP__
+#ifndef _THKAME_CLIENT_TEXT_HPP__
+#define _THKAME_CLIENT_TEXT_HPP__
 
 #include <string>
 
@@ -21,4 +21,4 @@ floatToString(float f, int size)
 
 } // namespace thk
 
-#endif // !_THKAME_CORE_TEXT_HPP__
+#endif // !_THKAME_CLIENT_TEXT_HPP__

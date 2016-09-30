@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Resources.hpp"
+#include "../client/Resources.hpp"
 
 namespace thk
 {

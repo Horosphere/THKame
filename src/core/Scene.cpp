@@ -5,7 +5,7 @@
 #include <iostream>
 #include <thread>
 
-#include "text.hpp"
+#include "../client/text.hpp"
 
 namespace thk
 {
