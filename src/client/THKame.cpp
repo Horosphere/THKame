@@ -106,14 +106,12 @@ void THKame::exec()
 
 		// Draw
 		window.clear();
-		if (menus.empty())
-		{
-			std::cout << "Menu empty" << std::endl;
+		if (scene)
 			scene->draw(&window, resources);
-		}
-		else
+
+		if (!menus.empty())
 		{
-			//menus.top()->draw(&window, resources);
+			menus.top()->draw(&window, resources);
 		}
 
 		// Draw fps

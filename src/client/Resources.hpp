@@ -8,14 +8,14 @@
 namespace thk
 {
 
-class Resources
+class Resources final
 {
 public:
 	bool load(std::string directory);
 
 	enum TextureId
 	{
-		Title0,
+		Title0 = 0,
 		Title1,
 		Difficulties,
 		Character0,
