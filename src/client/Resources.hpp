@@ -28,9 +28,23 @@ public:
 		Weapon2,
 		Weapon2b,
 
+		SL_KeyConfig,
+		SL_Manual,
+		SL_Music,
+		SL_Option,
+		SL_Player,
+		SL_PlayerData,
+		SL_Rank,
+		SL_Regist,
+		SL_Replay,
+		SL_SaveReplay,
+		SL_Spell,
+		SL_Stage,
+		SL_Weapon,
+
 		TidMax
 	};
-	sf::Texture texture(TextureId) const;
+	sf::Texture const& texture(TextureId) const;
 	sf::Font fontMonospace;
 
 private:
@@ -40,7 +54,7 @@ private:
 
 // Implementations
 
-inline sf::Texture
+inline sf::Texture const&
 Resources::texture(Resources::TextureId tid) const
 {
 	return textures[tid];

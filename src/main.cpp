@@ -1,30 +1,21 @@
 
 #include <iostream>
 
-#include "core/Scene.hpp"
+#include "client/THKame.hpp"
 
 int main(int argc, char* argv[])
 {
 	(void) argc;
 	(void) argv;
 
-	sf::ContextSettings cs;
-	cs.antialiasingLevel = 8;
+	thk::THKame application;
+	if (!application.init()) return -1;
 
-	sf::RenderWindow window(sf::VideoMode(800, 600),
-	                        "THKame",
-	                        sf::Style::Default,
-	                        cs);
+	application.exec();
 
-	thk::Resources r;
-	if (!r.load("../resources/"))
-	{
-		std::cout << "Unable to load resources. Quit" << std::endl;
-		return -1;
-	}
 
-	thk::Scene scene;
-	scene.start(&window, r, 4);
+	//thk::Scene scene;
+	//scene.start(&window, r, 4);
 
 	return 0;
 }

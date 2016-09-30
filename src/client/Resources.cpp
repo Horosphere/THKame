@@ -7,7 +7,7 @@ namespace thk
 
 bool Resources::load(std::string directory)
 {
-	bool flag;
+	bool flag = true;
 
 	flag = fontMonospace.loadFromFile(directory + "LiberationMono.ttf");
 	if (!flag) return false;
@@ -33,6 +33,19 @@ bool Resources::load(std::string directory)
 	LOAD_TEXTURE(Weapon1b, "ui/weapon_01b.png");
 	LOAD_TEXTURE(Weapon2, "ui/weapon_01.png");
 	LOAD_TEXTURE(Weapon2b, "ui/weapon_01b.png");
+	LOAD_TEXTURE(SL_KeyConfig, "ui/sl/sl_keyconfig.png");
+	LOAD_TEXTURE(SL_Manual, "ui/sl/sl_manual.png");
+	LOAD_TEXTURE(SL_Music, "ui/sl/sl_music.png");
+	LOAD_TEXTURE(SL_Option, "ui/sl/sl_option.png");
+	LOAD_TEXTURE(SL_Player, "ui/sl/sl_player.png");
+	LOAD_TEXTURE(SL_PlayerData, "ui/sl/sl_playerdata.png");
+	LOAD_TEXTURE(SL_Rank, "ui/sl/sl_rank.png");
+	LOAD_TEXTURE(SL_Regist, "ui/sl/sl_regist.png");
+	LOAD_TEXTURE(SL_Replay, "ui/sl/sl_replay.png");
+	LOAD_TEXTURE(SL_SaveReplay, "ui/sl/sl_savereplay.png");
+	LOAD_TEXTURE(SL_Spell, "ui/sl/sl_spell.png");
+	LOAD_TEXTURE(SL_Stage, "ui/sl/sl_stage.png");
+	LOAD_TEXTURE(SL_Weapon, "ui/sl/sl_weapon.png");
 
 	return true;
 }

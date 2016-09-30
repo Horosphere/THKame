@@ -39,7 +39,9 @@ add_compile_options(-std=c++14)
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
     ${PROJECT_SOURCE_DIR}/core/Scene.cpp
-    ${PROJECT_SOURCE_DIR}/core/Resources.cpp
+    ${PROJECT_SOURCE_DIR}/client/MenuMain.cpp
+    ${PROJECT_SOURCE_DIR}/client/THKame.cpp
+    ${PROJECT_SOURCE_DIR}/client/Resources.cpp
    )
 # Auto-generated end
 
