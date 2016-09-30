@@ -38,14 +38,7 @@ add_compile_options(-std=c++14)
 # Auto-generated. Do not edit. All changes will be undone
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
-    ${PROJECT_SOURCE_DIR}/world/World.cpp
-    ${PROJECT_SOURCE_DIR}/core/Danmaku.cpp
-    ${PROJECT_SOURCE_DIR}/core/Server.cpp
-    ${PROJECT_SOURCE_DIR}/client/Client.cpp
-    ${PROJECT_SOURCE_DIR}/client/MenuMain.cpp
-    ${PROJECT_SOURCE_DIR}/client/ResourceManager.cpp
-    ${PROJECT_SOURCE_DIR}/client/Menu.cpp
-    ${PROJECT_SOURCE_DIR}/client/MenuCharacter.cpp
+    ${PROJECT_SOURCE_DIR}/core/Scene.cpp
    )
 # Auto-generated end
 
