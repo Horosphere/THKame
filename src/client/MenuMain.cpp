@@ -15,15 +15,12 @@ Scene* MenuMain::keyPressed(sf::Keyboard::Key key,
 	switch (key)
 	{
 	case sf::Keyboard::Up:
-		std::cout << "Move up" << std::endl;
 		index = circularDecrease(index, nKeys);
 		break;
 	case sf::Keyboard::Down:
-		std::cout << "Move down" << std::endl;
 		index = circularIncrease(index, nKeys);
 		break;
 	case sf::Keyboard::Space:
-		std::cout << "Create scene" << std::endl;
 		return new Scene;
 	default:
 		break;

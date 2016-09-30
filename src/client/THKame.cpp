@@ -23,18 +23,21 @@ bool THKame::init()
 	              sf::Style::Default,
 	              cs);
 
-	thk::Resources r;
-	if (!r.load("../resources/"))
+	if (!resources.load("../resources/"))
 	{
 		std::cout << "Unable to load resources. Quit" << std::endl;
 		return false;
 	}
 	menus.push(new MenuMain);
 
+	std::cout << "Client initialised" << std::endl;
+
 	return true;
 }
 void THKame::exec()
 {
+	fpsDisplayDuration = 0;
+
 	auto timeLast = std::chrono::high_resolution_clock::now();
 	while (window.isOpen())
 	{
@@ -43,7 +46,14 @@ void THKame::exec()
 		 */
 		int duration = std::chrono::duration_cast<std::chrono::milliseconds>
 		               (std::chrono::high_resolution_clock::now() - timeLast).count();
-		fps = 1000.f / duration;
+
+		// Update fps every 250ms
+		fpsDisplayDuration += duration;
+		if (fpsDisplayDuration > 250)
+		{
+			fps = 1000.f / duration;
+			fpsDisplayDuration = 0;
+		}
 		timeLast = std::chrono::high_resolution_clock::now();
 
 		sf::Event event;
@@ -61,8 +71,8 @@ void THKame::exec()
 					if (event.key.code == sf::Keyboard::Escape)
 					{
 						delete scene;
+						scene = nullptr;
 						menus.push(new MenuMain);
-						continue;
 					}
 					break;
 				default:
@@ -106,19 +116,18 @@ void THKame::exec()
 
 		// Draw
 		window.clear();
+
 		if (scene)
 			scene->draw(&window, resources);
 
 		if (!menus.empty())
-		{
 			menus.top()->draw(&window, resources);
-		}
 
 		// Draw fps
 		sf::Text textFPS;
 		textFPS.setFont(resources.fontMonospace);
 		textFPS.setString(floatToString(fps, 4));
-		textFPS.setCharacterSize(120);
+		textFPS.setCharacterSize(60);
 		textFPS.setFillColor(sf::Color::White);
 
 		window.draw(textFPS);

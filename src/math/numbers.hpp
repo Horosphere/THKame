@@ -18,7 +18,7 @@ circularIncrease(unsigned i, unsigned period)
 inline unsigned
 circularDecrease(unsigned i, unsigned period)
 {
-	return i > 0 ? period - 1 : i - 1;
+	return i == 0 ? period - 1 : i - 1;
 }
 
 } // namespace thk

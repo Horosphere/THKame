@@ -23,7 +23,7 @@ public:
 	 */
 	void exec();	
 
-private:
+//private:
 	Scene* scene;
 
 	Resources resources;
@@ -31,6 +31,7 @@ private:
 	std::stack<Menu*> menus;
 
 	float fps;
+	int fpsDisplayDuration;
 };
 
 } // namespace thk

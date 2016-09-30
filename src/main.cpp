@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "client/THKame.hpp"
+#include "client/MenuMain.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -13,10 +14,6 @@ int main(int argc, char* argv[])
 
 	application.exec();
 
-
-	//thk::Scene scene;
-	//scene.start(&window, r, 4);
-
 	return 0;
-}
 
+}
