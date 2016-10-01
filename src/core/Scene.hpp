@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../client/Resources.hpp"
+#include "../math/Transform.hpp"
 
 namespace thk
 {
@@ -19,6 +20,10 @@ public:
 
 private:
 	float posX, posY;
+	/**
+	 * Scene to screen transformation
+	 */
+	Transform sts;
 };
 
 

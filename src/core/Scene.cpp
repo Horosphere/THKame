@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "../client/text.hpp"
+#include "../core/init.hpp"
 
 namespace thk
 {
@@ -16,7 +17,7 @@ void Scene::calculate(int duration)
 {
 	// Calculate
 
-	constexpr float const speed = 1.f;
+	constexpr float const speed = 0.005f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		posX -= duration * speed;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -26,8 +27,9 @@ void Scene::calculate(int duration)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		posY += duration * speed;
 
-	posX = fmod(posX, 1280);
-	posY = fmod(posY, 960);
+	
+	posX = clamp(posX, 0, 1);
+	posY = clamp(posY, 0, 1);
 }
 
 void Scene::draw(sf::RenderWindow* const window,
@@ -39,7 +41,7 @@ void Scene::draw(sf::RenderWindow* const window,
 	test.setOutlineThickness(32);
 	test.setOutlineColor(sf::Color(24, 65, 125));
 	test.setPointCount(64);
-	test.setPosition(posX - 60, posY - 60);
+	test.setPosition(sts.trX(posX) - 60, sts.trY(posY) - 60);
 	window->draw(test);
 }
 

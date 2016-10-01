@@ -4,12 +4,21 @@
 namespace thk
 {
 
+typedef float real;
+
+real clamp(real, real min, real max) noexcept;
+
 unsigned circularIncrease(unsigned, unsigned period);
 unsigned circularDecrease(unsigned, unsigned period);
 
 
 // Implementations
 
+inline real clamp(real v, real min, real max) noexcept
+{
+	return v < min ? min :
+	       v > max ? max : v;
+}
 inline unsigned
 circularIncrease(unsigned i, unsigned period)
 {
