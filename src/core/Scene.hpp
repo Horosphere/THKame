@@ -5,6 +5,7 @@
 
 #include "../client/Resources.hpp"
 #include "../math/Transform.hpp"
+#include "../world/World.hpp"
 
 namespace thk
 {
@@ -24,6 +25,7 @@ private:
 	 * Scene to screen transformation
 	 */
 	Transform sts;
+	World world;
 };
 
 

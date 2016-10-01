@@ -1,7 +1,8 @@
 #ifndef _THKAME_CORE_INIT_HPP__
 #define _THKAME_CORE_INIT_HPP__
 
-#include <map>
+#include <vector>
+#include <string>
 
 #include "../math/numbers.hpp"
 
@@ -19,13 +20,14 @@ public:
 		Line
 	};
 
-	Bullet(HitType ht, real radius) noexcept:
-		ht(ht), radius(radius) {}
+	Bullet(std::string name, HitType ht, real radius) noexcept:
+		name(name), ht(ht), radius(radius) {}
 
+	std::string name;
 	HitType ht;
 	real radius;
 
-	static std::map<std::string, Bullet> bullets;
+	static std::vector<Bullet> bullets;
 };
 
 

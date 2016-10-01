@@ -12,10 +12,8 @@ public:
 	void read(boost::property_tree::ptree const&)
 	throw(boost::property_tree::ptree_error);
 
-	};
-	
-	
 };
+	
 
 } // namespace thk
 

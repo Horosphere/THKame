@@ -8,7 +8,7 @@ namespace thk
 
 /**
  * Transform a number from scene coordinate to screen coordinate
- * Scene coordinate: [0, 1] * [0, 1]
+ * Scene coordinate: [-1, 1] * [-1, 1]
  * Screen coordinate: [0, 1280] * [0, 960]
  */
 class Transform
@@ -16,19 +16,19 @@ class Transform
 public:
 	Transform() noexcept;
 
-	real trX(real x) const
+	int trX(real x) const
 	{
 		return x * scaleX + translateX;
 	}
-	real trY(real y) const
+	int trY(real y) const
 	{
 		return y * scaleY + translateY;
 	}
-	real trLX(real u) const
+	int trLX(real u) const
 	{
 		return u * scaleX;
 	}
-	real trLY(real v) const
+	int trLY(real v) const
 	{
 		return v * scaleY;
 	}
@@ -42,7 +42,7 @@ private:
 // Implementations
 
 inline Transform::Transform() noexcept:
-	scaleX(1280), scaleY(960), translateX(0), translateY(0)
+	scaleX(640), scaleY(480), translateX(640), translateY(480)
 {
 }
 
