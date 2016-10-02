@@ -6,11 +6,14 @@
 namespace thk
 {
 
+/**
+ * @brief The data of a single bullet
+ */
 struct BulletAutomatic
 {
 	int id;
-	real x, y;
-	real vx, vy;
+	real x, y; // Position
+	real vx, vy; // Velocity
 };
 
 } // namespace thk

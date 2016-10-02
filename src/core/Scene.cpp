@@ -11,14 +11,18 @@ namespace thk
 
 Scene::Scene(): posX(0.0), posY(0.0), world(-2.0, 2.0, -2.0, 2.0)
 {
+	/**
+	 * Push the default generator onto the generators
+	 */
 	Generator gen(10);
 	world.generators.push_back(gen);
 }
 
-void Scene::calculate(int duration)
+void Scene::tick(int duration)
 {
 	// Calculate
 
+	// Move the player
 	constexpr float const speed = 0.005f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		posX -= duration * speed;
@@ -29,10 +33,10 @@ void Scene::calculate(int duration)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		posY += duration * speed;
 
-	
 	posX = clamp(posX, -1, 1);
 	posY = clamp(posY, -1, 1);
 
+	// Emit bullets from the player's position
 	world.generators[0].setEnabled(sf::Keyboard::isKeyPressed(sf::Keyboard::Z));
 	world.generators[0].x = posX;
 	world.generators[0].y = posY;
@@ -52,7 +56,7 @@ void Scene::draw(sf::RenderWindow* const window,
 	player.setOutlineThickness(12);
 	player.setOutlineColor(sf::Color(24, 65, 125));
 	player.setPointCount(32);
-	player.setPosition(sts.trX(posX) - 37, sts.trY(posY) - 37);
+	player.setPosition(sts.trX(posX) - 53, sts.trY(posY) - 53);
 	window->draw(player);
 
 	// Draw bullets

@@ -15,12 +15,16 @@ class Scene final
 public:
 	Scene();
 
-	void calculate(int duration);
+	/**
+	 * @brief Updates the scene
+	 * @param[in] duration Amount of time in ms elapsed from last update
+	 */
+	void tick(int duration);
 	void draw(sf::RenderWindow* const,
 	          Resources const&) const;
 
 private:
-	float posX, posY;
+	float posX, posY; // Player position
 	/**
 	 * Scene to screen transformation
 	 */

@@ -17,8 +17,8 @@ public:
 	          Resources const&) const;
 
 private:
-	static constexpr unsigned const nKeys = 3;
-	unsigned index;
+	static constexpr unsigned const nKeys = 3; // Number of entries
+	unsigned index; // Current entry
 };
 
 } // namespace thk

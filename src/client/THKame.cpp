@@ -1,7 +1,8 @@
 #include "THKame.hpp"
 
-#include <iostream>
+#include <cassert>
 #include <chrono>
+#include <iostream>
 #include <thread>
 
 #include "MenuMain.hpp"
@@ -16,7 +17,7 @@ THKame::THKame() noexcept: scene(nullptr)
 bool THKame::init()
 {
 	sf::ContextSettings cs;
-	cs.antialiasingLevel = 8;
+	cs.antialiasingLevel = 8; // Enable antialiasing
 
 	window.create(sf::VideoMode(1280, 960),
 	              "THKame",
@@ -28,6 +29,8 @@ bool THKame::init()
 		std::cout << "Unable to load resources. Quit" << std::endl;
 		return false;
 	}
+
+	// Push main menu onto the menustack
 	menus.push(new MenuMain);
 
 	std::cout << "Client initialised" << std::endl;
@@ -36,7 +39,7 @@ bool THKame::init()
 }
 void THKame::exec()
 {
-	fpsDisplayDuration = 0;
+	fpsDisplayDuration = 0; // Reset duration
 
 	auto timeLast = std::chrono::high_resolution_clock::now();
 	while (window.isOpen())
@@ -56,9 +59,13 @@ void THKame::exec()
 		}
 		timeLast = std::chrono::high_resolution_clock::now();
 
+		// Receive events from SFML
+		
 		sf::Event event;
 		if (menus.empty()) // Scene must be up
 		{
+			assert(scene);
+
 			while (window.pollEvent(event))
 			{
 				switch (event.type)
@@ -96,8 +103,6 @@ void THKame::exec()
 					temp = menus.top()->keyPressed(event.key.code, &menus);
 					if (temp)
 					{
-						std::cout << "Init scene" << std::endl;
-						// Assign scene and pop all menus
 						scene = temp;
 						while (!menus.empty())
 						{
@@ -112,9 +117,10 @@ void THKame::exec()
 			}
 		}
 
-		if (scene) scene->calculate(duration);
+		if (scene) scene->tick(duration);
 
 		// Draw
+		
 		window.clear();
 
 		if (scene)
@@ -122,8 +128,9 @@ void THKame::exec()
 
 		if (!menus.empty())
 			menus.top()->draw(&window, resources);
+		assert(scene || !menus.empty());
 
-		// Draw fps
+		// Draw fps on top-left corner
 		sf::Text textFPS;
 		textFPS.setFont(resources.fontMonospace);
 		textFPS.setString(floatToString(fps, 4));

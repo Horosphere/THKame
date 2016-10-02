@@ -8,6 +8,9 @@
 namespace thk
 {
 
+/**
+ * @brief A generator emits bullets in a regular interval
+ */
 class Generator
 {
 public:

@@ -11,6 +11,10 @@ namespace thk
 
 void init();
 
+/**
+ * @brief Each Bullet instance represents one type of bullet, not one single
+ *	bullet.
+ */
 class Bullet final
 {
 public:

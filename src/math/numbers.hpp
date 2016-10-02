@@ -8,8 +8,14 @@ typedef float real;
 
 real clamp(real, real min, real max) noexcept;
 
-unsigned circularIncrease(unsigned, unsigned period);
-unsigned circularDecrease(unsigned, unsigned period);
+/**
+ * @brief Increase a number and wrap into the interval [0, period - 1]
+ */
+unsigned circularIncrease(unsigned val, unsigned period);
+/**
+ * @brief Decrease a number and wrap into the interval [0, period - 1]
+ */
+unsigned circularDecrease(unsigned val, unsigned period);
 
 
 // Implementations

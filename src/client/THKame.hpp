@@ -10,6 +10,9 @@
 namespace thk
 {
 
+/**
+ * The client
+ */
 class THKame final
 {
 public:
@@ -19,18 +22,21 @@ public:
 	 */
 	bool init();
 	/**
-	 * Start the game loop
+	 * The game loop
 	 */
 	void exec();	
 
-//private:
+private:
 	Scene* scene;
 
 	Resources resources;
 	sf::RenderWindow window;
-	std::stack<Menu*> menus;
+	std::stack<Menu*> menus; // Should be empty only if scene != NULL
 
-	float fps;
+	float fps; // Frame/Second
+	/**
+	 * The amount of time passed after the last fps update
+	 */
 	int fpsDisplayDuration;
 };
 

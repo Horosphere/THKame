@@ -42,9 +42,13 @@ void MenuMain::draw(sf::RenderWindow* const window,
 	};
 
 	sf::Sprite sprite;
+
+	// Draw background
 	sprite.setTexture(resources.texture(Resources::Title0));
 	window->draw(sprite);
 
+	// Draw individual keys vertically
+	
 	for (std::size_t i = 0; i < nKeys; ++i)
 	{
 		sprite.setTexture(resources.texture(buttons[i]));

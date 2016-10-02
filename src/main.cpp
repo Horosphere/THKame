@@ -1,8 +1,9 @@
-
+/**
+ * Main entry of the application
+ */
 #include <iostream>
 
 #include "client/THKame.hpp"
-#include "client/MenuMain.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -12,7 +13,7 @@ int main(int argc, char* argv[])
 	thk::THKame application;
 	if (!application.init()) return -1;
 
-	application.exec();
+	application.exec(); // Main loop
 
 	return 0;
 

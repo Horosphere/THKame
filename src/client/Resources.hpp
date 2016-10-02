@@ -8,9 +8,16 @@
 namespace thk
 {
 
+/**
+ * @brief Class for loading resources
+ */
 class Resources final
 {
 public:
+	/**
+	 * Initialises the resources from the given directory. Must be called before
+	 * the textures are referenced
+	 */
 	bool load(std::string directory);
 
 	enum TextureId
@@ -44,9 +51,9 @@ public:
 
 		TidMax
 	};
+
 	sf::Texture const& texture(TextureId) const;
 	sf::Font fontMonospace;
-
 private:
 	sf::Texture textures[(std::size_t)TidMax];
 };
