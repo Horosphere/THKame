@@ -51,7 +51,9 @@ set(SOURCE_FILES
 
 add_executable(THKame ${SOURCE_FILES})
 set(TARGET_NAME THKame)
+if (UNIX)
+	target_link_libraries(THKame m)
+endif (UNIX)
 target_link_libraries(THKame ${Boost_LIBRARIES})
 target_link_libraries(THKame sfml-graphics sfml-window sfml-system)
-target_link_libraries(THKame m)
 target_link_libraries(THKame ${CMAKE_THREAD_LIBS_INIT})
