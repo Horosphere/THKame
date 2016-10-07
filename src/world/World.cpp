@@ -3,26 +3,31 @@
 namespace thk
 {
 
+World::~World()
+{
+	for (auto entity: entities) delete entity;
+	delete player;
+}
+
 void World::tick(int duration)
 {
-	for (auto bullet = bulletsAutomatic.begin();
-	     bullet != bulletsAutomatic.end();)
+	for (auto entity = entities.begin(); entity != entities.end();)
 	{
-		bullet->x += bullet->vx * duration;
-		bullet->y += bullet->vy * duration;
-		if (bullet->x < minX || maxX < bullet->y ||
-		    bullet->y < minY || maxY < bullet->y)
-			bullet = bulletsAutomatic.erase(bullet);
-		else
-			++bullet;
-	}
-
-	// Max limit for bullets
-	if (bulletsAutomatic.size() < 4096)
-		for (auto& generator: generators)
+		(*entity)->tick(duration);
+		if ((*entity)->erasable)
 		{
-			generator.tick(duration, bulletsAutomatic);
+			if ((*entity)->x < minX || maxX < (*entity)->y ||
+			    (*entity)->y < minY || maxY < (*entity)->y)
+			{
+				delete(*entity);
+				entity = entities.erase(entity);
+			}
+			else
+				++entity;
 		}
+	}
+	if (player)
+		player->tick(duration);
 }
 
 } // namespace thk

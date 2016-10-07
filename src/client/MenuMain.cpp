@@ -20,8 +20,8 @@ Scene* MenuMain::keyPressed(sf::Keyboard::Key key,
 	case sf::Keyboard::Down:
 		index = circularIncrease(index, nKeys);
 		break;
-	case sf::Keyboard::Space:
-		return new Scene;
+	case sf::Keyboard::Z:
+		if (index == 0) return new Scene;
 	default:
 		break;
 	}

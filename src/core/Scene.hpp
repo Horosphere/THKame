@@ -24,7 +24,6 @@ public:
 	          Resources const&) const;
 
 private:
-	float posX, posY; // Player position
 	/**
 	 * Scene to screen transformation
 	 */

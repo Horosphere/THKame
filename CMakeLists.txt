@@ -39,7 +39,7 @@ add_compile_options(-std=c++14)
 set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
     ${PROJECT_SOURCE_DIR}/world/World.cpp
-    ${PROJECT_SOURCE_DIR}/world/Generator.cpp
+    ${PROJECT_SOURCE_DIR}/entities/Player.cpp
     ${PROJECT_SOURCE_DIR}/core/Danmaku.cpp
     ${PROJECT_SOURCE_DIR}/core/init.cpp
     ${PROJECT_SOURCE_DIR}/core/Scene.cpp
