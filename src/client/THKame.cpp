@@ -7,6 +7,7 @@
 
 #include "MenuMain.hpp"
 #include "text.hpp"
+#include "render/RenderBullet.hpp"
 
 namespace thk
 {
@@ -60,7 +61,7 @@ void THKame::exec()
 		timeLast = std::chrono::high_resolution_clock::now();
 
 		// Receive events from SFML
-		
+
 		sf::Event event;
 		if (menus.empty()) // Scene must be up
 		{
@@ -101,15 +102,7 @@ void THKame::exec()
 					return;
 				case sf::Event::KeyPressed:
 					temp = menus.top()->keyPressed(event.key.code, &menus);
-					if (temp)
-					{
-						scene = temp;
-						while (!menus.empty())
-						{
-							delete menus.top();
-							menus.pop();
-						}
-					}
+					if (temp) initScene(temp);
 					break;
 				default:
 					break;
@@ -120,7 +113,7 @@ void THKame::exec()
 		if (scene) scene->tick(duration);
 
 		// Draw
-		
+
 		window.clear();
 
 		if (scene)
@@ -143,4 +136,14 @@ void THKame::exec()
 	}
 }
 
+void THKame::initScene(Scene* s)
+{
+	scene = s;
+	s->registerRenderer<Bullet>(new RenderBullet(&window, &resources, &toScreen));
+	while (!menus.empty())
+	{
+		delete menus.top();
+		menus.pop();
+	}
+}
 } // namespace thk

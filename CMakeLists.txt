@@ -22,6 +22,19 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 include_directories("${SFML_INCLUDE_DIR}")
 link_directories(${SFML_LIBRARY_DIR})
 
+set(StdFeatures
+	cxx_range_for
+	cxx_noexcept
+	cxx_rvalue_references
+	cxx_override
+	cxx_lambdas
+	cxx_final
+	cxx_deleted_functions
+	cxx_delegating_constructors
+	cxx_auto_type
+	cxx_constexpr
+	)
+
 # Include Boost
 find_package(Boost 1.61.0 COMPONENTS thread REQUIRED)
 if (${Boost_FOUND})
@@ -31,7 +44,6 @@ endif()
 
 find_package(Threads REQUIRED)
 
-add_compile_options(-std=c++14)
 
 # Do not remove the following auto-generated signatures
 
@@ -46,6 +58,7 @@ set(SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/client/MenuMain.cpp
     ${PROJECT_SOURCE_DIR}/client/THKame.cpp
     ${PROJECT_SOURCE_DIR}/client/Resources.cpp
+    ${PROJECT_SOURCE_DIR}/client/render/RenderBullet.cpp
    )
 # Auto-generated end
 
@@ -57,3 +70,4 @@ endif (UNIX)
 target_link_libraries(THKame ${Boost_LIBRARIES})
 target_link_libraries(THKame sfml-graphics sfml-window sfml-system)
 target_link_libraries(THKame ${CMAKE_THREAD_LIBS_INIT})
+target_compile_features(THKame PRIVATE ${StdFeatures})

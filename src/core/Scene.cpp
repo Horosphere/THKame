@@ -14,6 +14,13 @@ Scene::Scene(): world(-2.0, 2.0, -2.0, 2.0)
 	Player* player = new Player(&world, 0, 0);
 	world.setPlayer(player);
 }
+Scene::~Scene()
+{
+	for (auto& render: renders)
+	{
+		delete render.second;
+	}
+}
 
 void Scene::tick(int duration)
 {
@@ -53,14 +60,9 @@ void Scene::draw(sf::RenderWindow* const window,
 	player.setPosition(sts.trX(p->x) - 53, sts.trY(p->y) - 53);
 	window->draw(player);
 
-	// Draw bullets
-	sf::CircleShape bullet0(6);
-	bullet0.setFillColor(sf::Color::White);
-
 	auto entityRender = [&](Entity const* e)
 	{
-		bullet0.setPosition(sts.trX(e->x) - 6, sts.trY(e->y) - 6);
-		window->draw(bullet0);
+		renders.at(typeid(*e))->draw(e);
 	};
 	world.iterateEntities(entityRender);
 }

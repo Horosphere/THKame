@@ -27,11 +27,14 @@ public:
 	void exec();	
 
 private:
+	void initScene(Scene*);
+
 	Scene* scene;
 
 	Resources resources;
 	sf::RenderWindow window;
 	std::stack<Menu*> menus; // Should be empty only if scene != NULL
+	Transform toScreen;
 
 	float fps; // Frame/Second
 	/**
