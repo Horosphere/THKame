@@ -36,7 +36,7 @@ set(StdFeatures
 	)
 
 # Include Boost
-find_package(Boost 1.61.0 COMPONENTS thread REQUIRED)
+find_package(Boost 1.58.0 COMPONENTS thread REQUIRED)
 if (${Boost_FOUND})
 	include_directories(${Boost_INCLUDE_DIRS})
 	link_directories(${Boost_LIBRARY_DIR})
